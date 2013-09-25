@@ -1,9 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Event">
-        <attribute name="timeStamp" optional="YES" attributeType="Date"/>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12F37" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Conference" representedClassName="Conference" syncable="YES">
+        <attribute name="addToCal" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="endTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notify" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="repeat" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="conferenceLine" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ConferenceLine" inverseName="conferences" inverseEntity="ConferenceLine" syncable="YES"/>
+        <relationship name="moderators" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Contact" inverseName="moderatorConferences" inverseEntity="Contact" syncable="YES"/>
+        <relationship name="participants" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Contact" inverseName="participantConferences" inverseEntity="Contact" syncable="YES"/>
+    </entity>
+    <entity name="ConferenceLine" representedClassName="ConferenceLine" syncable="YES">
+        <attribute name="moderatorCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="participantCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="suffix" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="conferences" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Conference" inverseName="conferenceLine" inverseEntity="Conference" syncable="YES"/>
+    </entity>
+    <entity name="Contact" representedClassName="Contact" syncable="YES">
+        <attribute name="addToPhone" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recordID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="contacts" inverseEntity="Group" syncable="YES"/>
+        <relationship name="moderatorConferences" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Conference" inverseName="moderators" inverseEntity="Conference" syncable="YES"/>
+        <relationship name="participantConferences" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Conference" inverseName="participants" inverseEntity="Conference" syncable="YES"/>
+    </entity>
+    <entity name="Group" representedClassName="Group" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="contacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contact" inverseName="groups" inverseEntity="Contact" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="261" positionY="189" width="128" height="60"/>
+        <element name="Conference" positionX="160" positionY="192" width="128" height="195"/>
+        <element name="ConferenceLine" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="Contact" positionX="160" positionY="192" width="128" height="180"/>
+        <element name="Group" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>

@@ -1,13 +1,9 @@
-//
-//  AppDelegate.h
-//  AccuConference2
-//
-//  Created by Alex Telford on 8/24/13.
-//  Copyright (c) 2013 Alex Telford. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
-
+#import "RootTabController.h"
+#import "Conference.h"
+#import "ConferenceLine.h"
+#import "Group.h"
+#import "Contact.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
