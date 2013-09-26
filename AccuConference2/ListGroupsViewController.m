@@ -7,7 +7,17 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupsModified:) name:GROUPS_MODIFIED object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:READ_GROUPS object:nil];
+    self.groups = [Group all];
+    if(self.groups.count > 0){
+        [self hideNoGroups];
+        [self.table reloadData];
+    } else {
+        [self showNoGroups];
+    }
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning{
@@ -59,7 +69,7 @@
 
 #pragma mark Events
 -(void)groupsModified:(NSNotification *)notification{
-    self.groups = (NSArray *) [notification.userInfo objectForKey:@"groups"];
+    self.groups = (NSArray *) [notification.userInfo objectForKey:[Group modelName]];
     if(self.groups.count > 0){
         [self hideNoGroups];
         [self.table reloadData];

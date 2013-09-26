@@ -1,17 +1,17 @@
 #import "ListContactsViewController.h"
 
 @implementation ListContactsViewController
-@synthesize delegate, table, segmentedControl, contacts;
+@synthesize delegate, table, segmentedControl, contacts, selectedContacts;
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [self deleteDummyData];
-    [self generateDummyData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupsChanged:) name:GROUPS_MODIFIED object:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [self deleteDummyData];
+    [self generateDummyData];
     self.contacts = [self AllContactsFromDB];
     self.accudialContacts = [self AccudialContactsFromDB];
     [self.table reloadData];
@@ -341,6 +341,7 @@
 -(void)donePressed{
     NSMutableArray *selectedContacts = [[NSMutableArray alloc] init];
     NSMutableArray *selectedGroups = [[NSMutableArray alloc] init];
+    if(self.accudialContacts){
     for (NSArray *letterArray in self.accudialContacts) {
         for (Contact *contact in letterArray) {
             if(contact.selected){
@@ -349,6 +350,9 @@
             }
         }
     }
+    }
+    
+    if(self.contacts){
     for (NSArray *letterArray in self.contacts) {
         for (Contact *contact in letterArray) {
             if(contact.selected){
@@ -357,11 +361,14 @@
             }
         }
     }
+    }
+    if(self.groups){
     for (Group *group in self.groups) {
         if(group.selected){
             [selectedGroups addObject:group];
             group.selected = NO;
         }
+    }
     }
     NSDictionary *retDict = [NSDictionary dictionaryWithObjectsAndKeys:selectedContacts, @"selectedContacts", selectedGroups, @"selectedGroups", nil];
     if(self.delegate && [self.delegate respondsToSelector:@selector(ListContactsDidFinishSelecting:)]){

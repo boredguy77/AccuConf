@@ -15,6 +15,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.tableView .allowsSelection = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -54,5 +55,7 @@
         addEdit.conference = (Conference *) sender;
     }
 }
+
+
 
 @end

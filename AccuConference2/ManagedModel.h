@@ -17,6 +17,7 @@
 +(NSEntityDescription *)entity;
 +(NSManagedObjectContext *)managedObjectContextRef;
 +(void)setEntity:(NSEntityDescription *)entity;
++(BOOL)validate:(ManagedModel *)managedModel;
 
 +(void)setManagedObjectcontextRef:(NSManagedObjectContext *)moc;
 

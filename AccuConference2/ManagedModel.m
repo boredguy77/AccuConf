@@ -104,6 +104,10 @@ static NSString *modelName = @"ManagedModel";
     return managedModel;
 }
 
++(BOOL)validate:(ManagedModel *)managedModel{
+    return managedModel != nil;
+}
+
 +(void)dispatchAll{
     NSLog(@"dispatchAll %@s", [[self class] modelName]);
     NSArray *objects = [[self class ]all];

@@ -19,7 +19,6 @@
 -(IBAction)createConferencePressed;
 -(IBAction)segmentedControlToggle:(id)sender;
 
--(void)didCreateConference:(NSNotification *)notification;
 -(void)conferencesModified:(NSNotification *)notification;
 
 @end

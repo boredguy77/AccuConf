@@ -25,13 +25,20 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreateConference:) name:CONFERENCE_CREATED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(conferencesModified:) name:CONFERENCES_MODIFIED object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] postNotificationName:READ_CONFERENCES object:nil userInfo:nil];
+    self.conferences = [Conference all];
+    if(self.conferences.count > 0){
+        [self showConferencesTable];
+        [self hideNoConferencesNotification];
+        [self.table reloadData];
+    } else {
+        [self hideConferencesTable];
+        [self showNoConferencesNotification];
+    }
 }
 
 -(void)showConferencesTable{
@@ -116,21 +123,17 @@
 }
 
 #pragma mark - Events
--(void)didCreateConference:(NSNotification *)notification{
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
 -(void)conferencesModified:(NSNotification *)notification{
     NSLog(@"conferences modified");
     self.conferences = (NSArray *)[notification.userInfo objectForKey:[Conference modelName]];
     if(self.conferences.count > 0){
         [self showConferencesTable];
         [self hideNoConferencesNotification];
+        [self.table reloadData];
     } else {
         [self hideConferencesTable];
         [self showNoConferencesNotification];
     }
-    [self.table reloadData];
 }
 
 @end

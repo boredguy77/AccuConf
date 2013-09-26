@@ -14,6 +14,7 @@
 @property(nonatomic, strong) NSArray *contacts;
 @property(nonatomic, strong) NSArray *accudialContacts;
 @property(nonatomic, strong) NSArray *groups;
+@property(nonatomic, strong) NSArray *selectedContacts;
 
 -(IBAction)segmentedButtonPress;
 -(IBAction)donePressed;

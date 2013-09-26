@@ -18,7 +18,7 @@
         <attribute name="number" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="participantCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="suffix" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="conferences" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Conference" inverseName="conferenceLine" inverseEntity="Conference" syncable="YES"/>
+        <relationship name="conferences" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Conference" inverseName="conferenceLine" inverseEntity="Conference" syncable="YES"/>
     </entity>
     <entity name="Contact" representedClassName="Contact" syncable="YES">
         <attribute name="addToPhone" optional="YES" attributeType="Boolean" syncable="YES"/>

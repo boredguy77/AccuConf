@@ -3,21 +3,22 @@
 @implementation AddEditGroupViewController
 @synthesize nameField, contacts, group;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view.
     if(self.group){
+        self.title = self.group.name;
         self.nameField.text = group.name;
         self.contacts = group.contacts.allObjects;
+    } else {
+        self.title = @"Add New Group";
+        self.contacts = [NSArray array];
     }
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning{
@@ -35,16 +36,12 @@
     if(self.group){
         grp = self.group;
     } else {
-        grp = (Group *)[Group instance:NO];
+        grp = (Group *)[Group instance:YES];
     }
     grp.name = self.nameField.text;
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:grp, @"modelGroup", self.contacts, @"contacts", nil];
+    grp.contacts = [NSSet setWithArray:self.contacts];
+    [Group save:grp];
     
-    if(self.group){
-        [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_GROUP object:nil userInfo:dict];
-    } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:CREATE_GROUP object:nil userInfo:dict];
-    }
     
     self.nameField.text = @"";
     self.contacts = nil;
@@ -57,14 +54,17 @@
     if([segue.destinationViewController isKindOfClass:[ListContactsViewController class]]){
         ListContactsViewController *listContactsViewController = (ListContactsViewController *)segue.destinationViewController;
         listContactsViewController.delegate = self;
+//        listContactsViewController.sel
     }
 }
 
 #pragma mark - ListContactSelection Protocol
 -(void)ListContactsDidFinishSelecting:(NSDictionary *)dict{
-    self.contacts = (NSArray *) [dict objectForKey:@"selectedContacts"];
+    
+    NSArray *selectedContacts = (NSArray *) [dict objectForKey:@"selectedContacts"];
+    
+    self.contacts = selectedContacts;
     [self.table reloadData];
-    //= (NSArray *) [dict objectForKey:@"groups"];
 }
 
 #pragma mark - UITableView Delegate
@@ -90,4 +90,5 @@
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
+
 @end

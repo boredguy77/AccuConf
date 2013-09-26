@@ -414,7 +414,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="table" destination="jb3-5e-Vjc" id="eap-c6-g4S"/>
-                        <segue destination="aMV-1P-PMs" kind="push" identifier="toListContacts" id="zsI-Px-FiS"/>
+                        <segue destination="aMV-1P-PMs" kind="push" identifier="toSelectContacts" id="zsI-Px-FiS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Vy-2A-o4k" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -848,6 +848,7 @@
                         <outlet property="notesLabel" destination="lNW-k8-D4c" id="Ilc-bZ-TFO"/>
                         <outlet property="notifyLabel" destination="ahj-m9-qGF" id="csZ-kh-ZNV"/>
                         <outlet property="repeatLabel" destination="bO7-wG-SuH" id="l3n-oL-mlD"/>
+                        <outlet property="table" destination="p9g-Z6-cTy" id="J0i-1W-okD"/>
                         <outlet property="timeLabel" destination="jRm-00-m5O" id="8oG-4S-BuI"/>
                         <segue destination="mqk-1A-lW0" kind="push" identifier="toAddEditConference" id="t9R-uF-Lca"/>
                     </connections>
@@ -878,8 +879,8 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wdw-Py-h4s">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="204" id="HRc-LQ-a6n"/>
-                                    <constraint firstAttribute="height" constant="38" id="w6C-eH-zTn"/>
+                                    <constraint firstAttribute="height" constant="52" id="D2A-Vh-r0L"/>
+                                    <constraint firstAttribute="width" constant="240" id="Sh2-nV-1OW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" backgroundImage="createConferenceRed.png">
@@ -990,12 +991,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Bjr-Dn-q2C" firstAttribute="top" secondItem="gyz-jV-3RG" secondAttribute="top" constant="118" id="01y-Te-5D1"/>
-                            <constraint firstItem="wdw-Py-h4s" firstAttribute="centerX" secondItem="Bjr-Dn-q2C" secondAttribute="centerX" type="default" id="9VH-hb-RkS"/>
                             <constraint firstItem="wdw-Py-h4s" firstAttribute="top" secondItem="gyz-jV-3RG" secondAttribute="top" constant="209" id="EWR-Qq-NY2"/>
                             <constraint firstItem="bz2-Gf-BPp" firstAttribute="top" secondItem="gyz-jV-3RG" secondAttribute="top" constant="20" symbolic="YES" type="default" id="GPt-vm-byZ"/>
                             <constraint firstAttribute="trailing" secondItem="bz2-Gf-BPp" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="JSv-98-qPa"/>
                             <constraint firstItem="eHc-Ri-iCg" firstAttribute="bottom" secondItem="gyz-jV-3RG" secondAttribute="bottom" type="default" id="MSi-iw-FbR"/>
                             <constraint firstItem="mVo-jo-0Pv" firstAttribute="top" secondItem="gyz-jV-3RG" secondAttribute="top" type="default" id="OgU-fL-KeV"/>
+                            <constraint firstAttribute="centerX" secondItem="wdw-Py-h4s" secondAttribute="centerX" type="user" id="Pj2-G2-Hee"/>
                             <constraint firstItem="mVo-jo-0Pv" firstAttribute="bottom" secondItem="gyz-jV-3RG" secondAttribute="bottom" type="default" id="Vf5-At-wpG"/>
                             <constraint firstItem="mVo-jo-0Pv" firstAttribute="leading" secondItem="gyz-jV-3RG" secondAttribute="leading" type="default" id="Ydt-dE-KtR"/>
                             <constraint firstItem="eHc-Ri-iCg" firstAttribute="leading" secondItem="gyz-jV-3RG" secondAttribute="leading" type="default" id="bNQ-vZ-uCf"/>
@@ -1046,7 +1047,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S9i-39-MbZ">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="1lx-1k-zMs"/>
-                                    <constraint firstAttribute="width" constant="280" type="user" id="VMm-SI-s83"/>
+                                    <constraint firstAttribute="width" constant="240" id="8VD-FQ-MQ0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" backgroundImage="setupLineButton.png">
@@ -1108,9 +1109,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.97647064924240112" green="0.9803922176361084" blue="0.98431378602981567" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="S9i-39-MbZ" secondAttribute="centerX" type="user" id="16s-yl-aL8"/>
                             <constraint firstItem="fiw-AA-Wsk" firstAttribute="top" secondItem="afZ-7b-CM7" secondAttribute="top" constant="118" id="Azc-hd-qZz"/>
                             <constraint firstItem="mSD-9h-uZa" firstAttribute="leading" secondItem="afZ-7b-CM7" secondAttribute="leading" type="default" id="Brn-uw-6kY"/>
-                            <constraint firstAttribute="trailing" secondItem="S9i-39-MbZ" secondAttribute="trailing" constant="20" symbolic="YES" type="user" id="LfT-Pc-ONT"/>
                             <constraint firstItem="IZQ-KW-3V8" firstAttribute="bottom" secondItem="afZ-7b-CM7" secondAttribute="bottom" type="default" id="U0K-2Q-VBm"/>
                             <constraint firstItem="fiw-AA-Wsk" firstAttribute="leading" secondItem="afZ-7b-CM7" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="Upl-zE-t5G"/>
                             <constraint firstItem="mSD-9h-uZa" firstAttribute="top" secondItem="afZ-7b-CM7" secondAttribute="top" type="default" id="e4X-wM-poX"/>
@@ -1120,7 +1121,6 @@
                             <constraint firstAttribute="trailing" secondItem="fiw-AA-Wsk" secondAttribute="trailing" constant="20" symbolic="YES" type="user" id="oud-Se-YQ2"/>
                             <constraint firstItem="mSD-9h-uZa" firstAttribute="bottom" secondItem="afZ-7b-CM7" secondAttribute="bottom" type="default" id="pEl-WO-BXr"/>
                             <constraint firstItem="S9i-39-MbZ" firstAttribute="top" secondItem="afZ-7b-CM7" secondAttribute="top" constant="206" id="tzt-BP-R6j"/>
-                            <constraint firstItem="S9i-39-MbZ" firstAttribute="leading" secondItem="afZ-7b-CM7" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="xbz-S3-MZh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Conference Lines" id="Qnm-zN-Mx0">
@@ -2221,9 +2221,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="pYj-pU-BNv"/>
         <segue reference="8qN-EN-Je8"/>
-        <segue reference="mxC-yB-AGU"/>
-        <segue reference="t9R-uF-Lca"/>
+        <segue reference="rUA-iV-7zI"/>
+        <segue reference="pYj-pU-BNv"/>
+        <segue reference="zsI-Px-FiS"/>
     </inferredMetricsTieBreakers>
 </document>

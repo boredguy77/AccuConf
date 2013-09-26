@@ -16,8 +16,16 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     NSLog(@"ViewDidLoad");
-    self.conferenceLines = [ConferenceLine all];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(conferenceLinesModified:) name:CONFERENCE_LINES_MODIFIED object:nil];
+    self.conferenceLines = [ConferenceLine all];
+    if(self.conferenceLines.count>0) {
+        [self hideNoConferenceLinesNotification];
+        [self showConferenceLinesTable];
+        [self.table reloadData];
+    } else {
+        [self hideConferenceLinesTable];
+        [self showNoConferenceLinesNotification];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -98,12 +106,12 @@
     if(self.conferenceLines.count>0) {
         [self hideNoConferenceLinesNotification];
         [self showConferenceLinesTable];
+        [self.table reloadData];
     } else {
         [self hideConferenceLinesTable];
         [self showNoConferenceLinesNotification];
     }
     
-    [self.table reloadData];
 }
 
 #pragma mark - Segue
