@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		090A7A3217FD0C3000B0A273 /* RoundRectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 090A7A3117FD0C3000B0A273 /* RoundRectButton.m */; };
+		090A7A3517FD145800B0A273 /* RoundRectTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 090A7A3417FD145800B0A273 /* RoundRectTextField.m */; };
+		090A7A3817FD1A1800B0A273 /* FormScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 090A7A3717FD1A1800B0A273 /* FormScrollView.m */; };
+		090A7A4117FD265F00B0A273 /* ParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090A7A4017FD265F00B0A273 /* ParentViewController.m */; };
+		090A7A4617FD2C6800B0A273 /* AccuConferenceLogoWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 090A7A4217FD2C6800B0A273 /* AccuConferenceLogoWhite.png */; };
+		090A7A4717FD2C6800B0A273 /* AccuConferenceLogoWhite_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 090A7A4317FD2C6800B0A273 /* AccuConferenceLogoWhite_small.png */; };
+		090A7A4817FD2C6800B0A273 /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = 090A7A4417FD2C6800B0A273 /* welcome.png */; };
+		090A7A4917FD2C6800B0A273 /* custom.png in Resources */ = {isa = PBXBuildFile; fileRef = 090A7A4517FD2C6800B0A273 /* custom.png */; };
+		090A7A4C17FD2E9000B0A273 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090A7A4B17FD2E9000B0A273 /* InfoViewController.m */; };
 		09395E7D17F26DC7000B0D4B /* ManagedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 09395E7C17F26DC7000B0D4B /* ManagedModel.m */; };
 		09D7482B17E807D400DC4FD1 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D7482A17E807D400DC4FD1 /* Group.m */; };
 		09D7482E17E810E400DC4FD1 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D7482C17E810E300DC4FD1 /* AddressBook.framework */; };
@@ -64,6 +73,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		090A7A3017FD0C3000B0A273 /* RoundRectButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundRectButton.h; sourceTree = "<group>"; };
+		090A7A3117FD0C3000B0A273 /* RoundRectButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundRectButton.m; sourceTree = "<group>"; };
+		090A7A3317FD145800B0A273 /* RoundRectTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundRectTextField.h; sourceTree = "<group>"; };
+		090A7A3417FD145800B0A273 /* RoundRectTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundRectTextField.m; sourceTree = "<group>"; };
+		090A7A3617FD1A1800B0A273 /* FormScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormScrollView.h; sourceTree = "<group>"; };
+		090A7A3717FD1A1800B0A273 /* FormScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormScrollView.m; sourceTree = "<group>"; };
+		090A7A3F17FD265F00B0A273 /* ParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentViewController.h; sourceTree = "<group>"; };
+		090A7A4017FD265F00B0A273 /* ParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentViewController.m; sourceTree = "<group>"; };
+		090A7A4217FD2C6800B0A273 /* AccuConferenceLogoWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccuConferenceLogoWhite.png; sourceTree = "<group>"; };
+		090A7A4317FD2C6800B0A273 /* AccuConferenceLogoWhite_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccuConferenceLogoWhite_small.png; sourceTree = "<group>"; };
+		090A7A4417FD2C6800B0A273 /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome.png; sourceTree = "<group>"; };
+		090A7A4517FD2C6800B0A273 /* custom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custom.png; sourceTree = "<group>"; };
+		090A7A4A17FD2E9000B0A273 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		090A7A4B17FD2E9000B0A273 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		09395E7B17F26DC7000B0D4B /* ManagedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagedModel.h; sourceTree = "<group>"; };
 		09395E7C17F26DC7000B0D4B /* ManagedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagedModel.m; sourceTree = "<group>"; };
 		09D7482917E807D400DC4FD1 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
@@ -162,6 +185,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		090A7A3E17FD213400B0A273 /* Autoscroller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Autoscroller;
+			sourceTree = "<group>";
+		};
 		09FEA4E417C9A29300958A17 = {
 			isa = PBXGroup;
 			children = (
@@ -245,12 +275,19 @@
 		09FEA51D17C9A2E300958A17 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				090A7A3E17FD213400B0A273 /* Autoscroller */,
 				09FEA50A17C9A29300958A17 /* MainStoryboard.storyboard */,
 				09FEA56617C9BC6700958A17 /* ConferenceLineRow.xib */,
 				09FEA58417CD0D0800958A17 /* SingleImageLeftSingleLineTextCell.h */,
 				09FEA58517CD0D0800958A17 /* SingleImageLeftSingleLineTextCell.m */,
 				09FEA59417CD67B400958A17 /* SingleImageLeftTitleAndSubTitleCell.h */,
 				09FEA59517CD67B400958A17 /* SingleImageLeftTitleAndSubTitleCell.m */,
+				090A7A3017FD0C3000B0A273 /* RoundRectButton.h */,
+				090A7A3117FD0C3000B0A273 /* RoundRectButton.m */,
+				090A7A3317FD145800B0A273 /* RoundRectTextField.h */,
+				090A7A3417FD145800B0A273 /* RoundRectTextField.m */,
+				090A7A3617FD1A1800B0A273 /* FormScrollView.h */,
+				090A7A3717FD1A1800B0A273 /* FormScrollView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -276,6 +313,10 @@
 		09FEA51F17C9A2F000958A17 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				090A7A4217FD2C6800B0A273 /* AccuConferenceLogoWhite.png */,
+				090A7A4317FD2C6800B0A273 /* AccuConferenceLogoWhite_small.png */,
+				090A7A4417FD2C6800B0A273 /* welcome.png */,
+				090A7A4517FD2C6800B0A273 /* custom.png */,
 				09FEA59717CE44B800958A17 /* radio.png */,
 				09FEA59817CE44B900958A17 /* radioPressed.png */,
 				09FEA57F17CC2D2C00958A17 /* slider.png */,
@@ -323,6 +364,8 @@
 		09FEA52417C9A31900958A17 /* Info */ = {
 			isa = PBXGroup;
 			children = (
+				090A7A4A17FD2E9000B0A273 /* InfoViewController.h */,
+				090A7A4B17FD2E9000B0A273 /* InfoViewController.m */,
 			);
 			name = Info;
 			sourceTree = "<group>";
@@ -335,6 +378,8 @@
 				09FEA58717CD245B00958A17 /* Constants.h */,
 				09FEA5A417CE9EE700958A17 /* RootTabController.h */,
 				09FEA5A517CE9EE700958A17 /* RootTabController.m */,
+				090A7A3F17FD265F00B0A273 /* ParentViewController.h */,
+				090A7A4017FD265F00B0A273 /* ParentViewController.m */,
 			);
 			name = shared;
 			sourceTree = "<group>";
@@ -452,16 +497,20 @@
 				09FEA52B17C9A34C00958A17 /* contacts.png in Resources */,
 				09FEA52C17C9A34C00958A17 /* info.png in Resources */,
 				09FEA56117C9AE3300958A17 /* setupLineButton.png in Resources */,
+				090A7A4717FD2C6800B0A273 /* AccuConferenceLogoWhite_small.png in Resources */,
 				09FEA56317C9AF0F00958A17 /* callLarge.png in Resources */,
 				09FEA56517C9B86900958A17 /* groups.png in Resources */,
 				09FEA56717C9BC6700958A17 /* ConferenceLineRow.xib in Resources */,
 				09FEA56917C9BE2300958A17 /* ConferenceLine.png in Resources */,
+				090A7A4617FD2C6800B0A273 /* AccuConferenceLogoWhite.png in Resources */,
 				09FEA56B17C9C06300958A17 /* conferenceLineDetail.png in Resources */,
 				09FEA56F17C9C47E00958A17 /* callInButton.png in Resources */,
 				09FEA57017C9C47E00958A17 /* createConference.png in Resources */,
 				09FEA57117C9C47E00958A17 /* shareLine.png in Resources */,
 				09FEA57317C9CD9200958A17 /* createConferenceRed.png in Resources */,
 				09FEA57817CC237C00958A17 /* CreateGroupButton.png in Resources */,
+				090A7A4817FD2C6800B0A273 /* welcome.png in Resources */,
+				090A7A4917FD2C6800B0A273 /* custom.png in Resources */,
 				09FEA57A17CC261D00958A17 /* addButtonBlue.png in Resources */,
 				09FEA57D17CC2A0600958A17 /* deleteButtonRed.png in Resources */,
 				09FEA58017CC2D2D00958A17 /* slider.png in Resources */,
@@ -482,8 +531,10 @@
 				09FEA50F17C9A29300958A17 /* AccuConference2.xcdatamodeld in Sources */,
 				09FEA53317C9A52900958A17 /* AddEditConferenceViewController.m in Sources */,
 				09FEA53617C9A54200958A17 /* ListConferencesViewController.m in Sources */,
+				090A7A3517FD145800B0A273 /* RoundRectTextField.m in Sources */,
 				09FEA53917C9A55B00958A17 /* ConferenceDetailViewController.m in Sources */,
 				09FEA53C17C9A60D00958A17 /* ListConferenceLinesViewController.m in Sources */,
+				090A7A4117FD265F00B0A273 /* ParentViewController.m in Sources */,
 				09FEA53F17C9A66700958A17 /* AddEddConferenceLinesViewController.m in Sources */,
 				09FEA54C17C9A83F00958A17 /* ConferenceLineDetailViewController.m in Sources */,
 				09FEA55517C9A8D200958A17 /* ListContactsViewController.m in Sources */,
@@ -491,14 +542,17 @@
 				09FEA55C17C9AA2300958A17 /* AddEditGroupViewController.m in Sources */,
 				09FEA55F17C9AA3100958A17 /* GroupDetailViewController.m in Sources */,
 				09FEA57617C9CFB500958A17 /* AddEditContactViewController.m in Sources */,
+				090A7A3217FD0C3000B0A273 /* RoundRectButton.m in Sources */,
 				09FEA58317CD06AD00958A17 /* ConferenceLine.m in Sources */,
 				09FEA58617CD0D0800958A17 /* SingleImageLeftSingleLineTextCell.m in Sources */,
 				09FEA59017CD5ED400958A17 /* Conference.m in Sources */,
+				090A7A3817FD1A1800B0A273 /* FormScrollView.m in Sources */,
 				09FEA59617CD67B400958A17 /* SingleImageLeftTitleAndSubTitleCell.m in Sources */,
 				09FEA59D17CE478300958A17 /* ListConferenceContactsViewController.m in Sources */,
 				09FEA5A017CE4B0E00958A17 /* Contact.m in Sources */,
 				09FEA5A617CE9EE700958A17 /* RootTabController.m in Sources */,
 				09D7482B17E807D400DC4FD1 /* Group.m in Sources */,
+				090A7A4C17FD2E9000B0A273 /* InfoViewController.m in Sources */,
 				09395E7D17F26DC7000B0D4B /* ManagedModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -587,6 +641,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AccuConference2/AccuConference2-Prefix.pch";
 				INFOPLIST_FILE = "AccuConference2/AccuConference2-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/alextelford/Development/AccuConference2/AccuConference2,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -598,6 +656,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AccuConference2/AccuConference2-Prefix.pch";
 				INFOPLIST_FILE = "AccuConference2/AccuConference2-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/alextelford/Development/AccuConference2/AccuConference2,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

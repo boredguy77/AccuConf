@@ -1,7 +1,8 @@
 #import <UIKit/UIKit.h>
 #import "ConferenceLine.h"
 #import "Constants.h"
-@interface AddEddConferenceLinesViewController : UIViewController
+#import "ParentViewController.h"
+@interface AddEddConferenceLinesViewController : ParentViewController
 @property(nonatomic, strong) IBOutlet UITextField *name;
 @property(nonatomic, strong) IBOutlet UITextField *number;
 @property(nonatomic, strong) IBOutlet UITextField *suffix;
@@ -12,4 +13,5 @@
 
 -(IBAction)saveButtonPressed;
 -(IBAction)deleteButtonPressed;
+
 @end

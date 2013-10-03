@@ -84,6 +84,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ConferenceLine *line = [self.conferenceLines objectAtIndex:[indexPath row]];
     SingleImageLeftSingleLineTextCell *cell = (SingleImageLeftSingleLineTextCell *)[tableView dequeueReusableCellWithIdentifier:CONFERENCE_LINE_CELL_ID];
+    NSLog(@"line name %@", line.name);
     cell.label.text = line.name;
     return cell;
 }

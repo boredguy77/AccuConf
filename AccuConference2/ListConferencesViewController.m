@@ -26,10 +26,6 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(conferencesModified:) name:CONFERENCES_MODIFIED object:nil];
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
     self.conferences = [Conference all];
     if(self.conferences.count > 0){
         [self showConferencesTable];
@@ -39,6 +35,10 @@
         [self hideConferencesTable];
         [self showNoConferencesNotification];
     }
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
 }
 
 -(void)showConferencesTable{

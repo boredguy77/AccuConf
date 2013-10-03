@@ -4,11 +4,12 @@
 #import "SingleImageLeftSingleLineTextCell.h"
 #import "ConferenceLineDetailViewController.h"
 #import "AddEditConferenceViewController.h"
+#import "ParentViewController.h"
 #import "Constants.h"
 
 @protocol ListConferenceLinesDelegate;
 
-@interface ListConferenceLinesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ListConferenceLinesViewController : ParentViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, strong) IBOutlet UITableView *table;
 @property(nonatomic, strong) IBOutlet UIImageView *background;

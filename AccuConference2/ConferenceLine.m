@@ -12,6 +12,12 @@ static NSString *modelName = @"ConferenceLine";
 @dynamic moderatorCode;
 @dynamic conferences;
 
++(void)save:(ManagedModel *)managedModel{
+    [super save:managedModel];
+    ConferenceLine *line = (ConferenceLine *) managedModel;
+    NSLog(@"save %@", line.name);
+}
+
 -(void)clone:(ConferenceLine *)lineToCopy{
     self.name = lineToCopy.name;
     self.number = lineToCopy.number;
