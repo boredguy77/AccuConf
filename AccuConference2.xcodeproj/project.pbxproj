@@ -67,7 +67,7 @@
 		09FEA59617CD67B400958A17 /* SingleImageLeftTitleAndSubTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FEA59517CD67B400958A17 /* SingleImageLeftTitleAndSubTitleCell.m */; };
 		09FEA59917CE44B900958A17 /* radio.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FEA59717CE44B800958A17 /* radio.png */; };
 		09FEA59A17CE44B900958A17 /* radioPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FEA59817CE44B900958A17 /* radioPressed.png */; };
-		09FEA59D17CE478300958A17 /* ListConferenceContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FEA59C17CE478300958A17 /* ListConferenceContactsViewController.m */; };
+		09FEA59D17CE478300958A17 /* ListConferenceContactsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 09FEA59C17CE478300958A17 /* ListConferenceContactsViewController.mm */; };
 		09FEA5A017CE4B0E00958A17 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FEA59F17CE4B0E00958A17 /* Contact.m */; };
 		09FEA5A617CE9EE700958A17 /* RootTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FEA5A517CE9EE700958A17 /* RootTabController.m */; };
 /* End PBXBuildFile section */
@@ -161,7 +161,7 @@
 		09FEA59717CE44B800958A17 /* radio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio.png; sourceTree = "<group>"; };
 		09FEA59817CE44B900958A17 /* radioPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radioPressed.png; sourceTree = "<group>"; };
 		09FEA59B17CE478300958A17 /* ListConferenceContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListConferenceContactsViewController.h; sourceTree = "<group>"; };
-		09FEA59C17CE478300958A17 /* ListConferenceContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListConferenceContactsViewController.m; sourceTree = "<group>"; };
+		09FEA59C17CE478300958A17 /* ListConferenceContactsViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ListConferenceContactsViewController.mm; sourceTree = "<group>"; };
 		09FEA59E17CE4B0E00958A17 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
 		09FEA59F17CE4B0E00958A17 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		09FEA5A417CE9EE700958A17 /* RootTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabController.h; sourceTree = "<group>"; };
@@ -414,7 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				09FEA59B17CE478300958A17 /* ListConferenceContactsViewController.h */,
-				09FEA59C17CE478300958A17 /* ListConferenceContactsViewController.m */,
+				09FEA59C17CE478300958A17 /* ListConferenceContactsViewController.mm */,
 				09FEA55317C9A8D200958A17 /* ListContactsViewController.h */,
 				09FEA55417C9A8D200958A17 /* ListContactsViewController.m */,
 				09FEA57417C9CFB500958A17 /* AddEditContactViewController.h */,
@@ -548,7 +548,7 @@
 				09FEA59017CD5ED400958A17 /* Conference.m in Sources */,
 				090A7A3817FD1A1800B0A273 /* FormScrollView.m in Sources */,
 				09FEA59617CD67B400958A17 /* SingleImageLeftTitleAndSubTitleCell.m in Sources */,
-				09FEA59D17CE478300958A17 /* ListConferenceContactsViewController.m in Sources */,
+				09FEA59D17CE478300958A17 /* ListConferenceContactsViewController.mm in Sources */,
 				09FEA5A017CE4B0E00958A17 /* Contact.m in Sources */,
 				09FEA5A617CE9EE700958A17 /* RootTabController.m in Sources */,
 				09D7482B17E807D400DC4FD1 /* Group.m in Sources */,

@@ -64,7 +64,7 @@
 }
 
 -(void)addParticipantPressed{
-    [self performSegueWithIdentifier:@"toSelectContactsController" sender:self];
+    [self performSegueWithIdentifier:@"toSelectContacts" sender:self];
 }
 
 -(void)addYourselfModeratorPressed{

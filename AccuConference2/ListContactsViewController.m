@@ -10,80 +10,101 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self deleteDummyData];
-    [self generateDummyData];
-    self.contacts = [self AllContactsFromDB];
-    self.accudialContacts = [self AccudialContactsFromDB];
-    [self.table reloadData];
+    if (ABAddressBookGetAuthorizationStatus() ==
+        kABAuthorizationStatusAuthorized) {
+        
+        [self deleteDummyData];
+        [self generateDummyData];
+        self.contacts = [self AllContactsFromDB];
+        self.accudialContacts = [self AccudialContactsFromDB];
+        [self.table reloadData];
+    } else {
+        self.accudialContacts = [self emptyContactArray];
+        self.contacts = [self emptyContactArray];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Database Access denied" message:@"Database Access Denied, Access needed to work with Contacts" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    }
+    
 }
 
--(NSArray *)AllContactsFromDB{
-    NSLog(@"populateContactsFromDB");
-    CFErrorRef error;
-    ABAddressBookRef ab = ABAddressBookCreateWithOptions(NULL, &error);
-    if(error){
-        NSLog(@"create ab error %@", error);
-    }
-    CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(ab);
-    CFMutableArrayRef peopleMutable = CFArrayCreateMutableCopy(
-                                                               kCFAllocatorDefault,
-                                                               CFArrayGetCount(people),
-                                                               people
-                                                               );
-    
-    CFArraySortValues(
-                      peopleMutable,
-                      CFRangeMake(0, CFArrayGetCount(peopleMutable)),
-                      (CFComparatorFunction) ABPersonComparePeopleByName,
-                      (void*) ABPersonGetSortOrdering()
-                      );
-    
-    NSArray *allPeople = (__bridge NSArray *) peopleMutable;
+-(NSArray *) emptyContactArray{
     NSMutableArray *retContacts = [[NSMutableArray alloc] initWithCapacity:27];
     for (int i = 0; i < 27; i++) {
         NSMutableArray *letterContacts = [[NSMutableArray alloc] init];
         [retContacts addObject:letterContacts];
     }
+    return retContacts;
+}
+
+-(NSArray *)AllContactsFromDB{
+    NSLog(@"populateContactsFromDB");
+    CFErrorRef er;
     
-    for (int i = 0; i < allPeople.count; i++) {
-        CFErrorRef err;
-        ABRecordRef record = (__bridge ABRecordRef)([allPeople objectAtIndex:i]);
-        ABAddressBookRemoveRecord(ab, record, &err);
-        ABRecordID recordID = ABRecordGetRecordID(record);
-        NSLog(@"contact");
-        Contact *contact = [Contact contactForRecordID:recordID];
-        if(!contact) {
-            contact = (Contact *)[Contact instance:YES];
-            NSString *fName = (__bridge NSString *)(ABRecordCopyValue(record, kABPersonFirstNameProperty));
-            NSString *lName = (__bridge NSString *)(ABRecordCopyValue(record, kABPersonFirstNameProperty));
-            contact.fName = fName;
-            contact.lName = lName;
-            contact.recordID = [NSNumber numberWithInt:recordID];
-            [Contact save:nil];
+    NSArray *retContacts = [self emptyContactArray];
+    
+    ABAddressBookRef ab = ABAddressBookCreateWithOptions(NULL, &er);
+    
+    CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(ab);
+    
+    if (people!=NULL) {
+        
+        CFMutableArrayRef peopleMutable = CFArrayCreateMutableCopy(
+                                                                   kCFAllocatorDefault,
+                                                                   CFArrayGetCount(people),
+                                                                   people
+                                                                   );
+        
+        CFArraySortValues(
+                          peopleMutable,
+                          CFRangeMake(0, CFArrayGetCount(peopleMutable)),
+                          (CFComparatorFunction) ABPersonComparePeopleByName,
+                          (void*) ABPersonGetSortOrdering()
+                          );
+        
+        NSArray *allPeople = (__bridge NSArray *) peopleMutable;
+        
+        
+        for (int i = 0; i < allPeople.count; i++) {
+            CFErrorRef err;
+            ABRecordRef record = (__bridge ABRecordRef)([allPeople objectAtIndex:i]);
+            ABAddressBookRemoveRecord(ab, record, &err);
+            ABRecordID recordID = ABRecordGetRecordID(record);
+            NSLog(@"contact");
+            Contact *contact = [Contact contactForRecordID:recordID];
+            if(!contact) {
+                contact = (Contact *)[Contact instance:YES];
+                NSString *fName = (__bridge NSString *)(ABRecordCopyValue(record, kABPersonFirstNameProperty));
+                NSString *lName = (__bridge NSString *)(ABRecordCopyValue(record, kABPersonFirstNameProperty));
+                contact.fName = fName;
+                contact.lName = lName;
+                contact.recordID = [NSNumber numberWithInt:recordID];
+                [Contact save:nil];
+            }
+            
+            NSLog(@" end contact");
+            
+            char lNameChar =  [[contact.lName lowercaseString] characterAtIndex:0] ;
+            
+            int index = (int) lNameChar;
+            
+            if (index > 95 && index < 123) {
+                index = index - 97;
+            } else {
+                index = 26;
+            }
+            
+            NSMutableArray *letterArray = (NSMutableArray *)[retContacts objectAtIndex:index];
+            [letterArray addObject:contact];
+            
+            
         }
         
-        NSLog(@" end contact");
         
-        char lNameChar =  [[contact.lName lowercaseString] characterAtIndex:0] ;
-        
-        int index = (int) lNameChar;
-        
-        if (index > 95 && index < 123) {
-            index = index - 97;
-        } else {
-            index = 26;
-        }
-        
-        NSMutableArray *letterArray = (NSMutableArray *)[retContacts objectAtIndex:index];
-        [letterArray addObject:contact];
-        
-        
+        CFRelease(ab);
+        CFRelease(people);
+        CFRelease(peopleMutable);
     }
     
-    
-    CFRelease(ab);
-    CFRelease(people);
-    CFRelease(peopleMutable);
     return retContacts;
     
 }
@@ -92,40 +113,6 @@
     NSLog(@"groups");
     CFErrorRef error;
     ABAddressBookRef ab = ABAddressBookCreateWithOptions(NULL, &error);
-    
-    CFArrayRef groups = ABAddressBookCopyArrayOfAllGroups(ab);
-    
-    int arraySize = CFArrayGetCount(groups);
-    
-    NSString *accudialGroup = @"Accudial";
-    
-    CFMutableArrayRef accudialContacts = CFArrayCreateMutable(kCFAllocatorDefault, 0, NULL);
-    
-    //iterate each group
-    for (int i = 0; i < arraySize-1; i++) {
-        ABRecordRef record = CFArrayGetValueAtIndex(groups, i);
-        CFStringRef* groupName = (CFStringRef *) ABRecordCopyValue(record, kABGroupNameProperty);
-        NSString *nsGroupName = (NSString *) CFBridgingRelease(groupName);
-        
-        if(nsGroupName && [accudialGroup isEqualToString:nsGroupName]){
-            NSLog(@"isEqual");
-            CFArrayRef allContactsInGroup = ABGroupCopyArrayOfAllMembers(record);
-            for (int i = 0; i < CFArrayGetCount(allContactsInGroup) - 1; i++) {
-                ABRecordRef groupRecord = CFArrayGetValueAtIndex(allContactsInGroup, i);
-                CFArrayAppendValue(accudialContacts, groupRecord);
-            }
-        }
-    }
-    
-    //Sort Contacts 
-    CFArraySortValues(
-                      accudialContacts,
-                      CFRangeMake(0, CFArrayGetCount(accudialContacts)),
-                      (CFComparatorFunction) ABPersonComparePeopleByName,
-                      (void*) ABPersonGetSortOrdering()
-                      );
-    
-    NSArray *allAccudialContacts = (__bridge NSArray *) accudialContacts;
     NSMutableArray *retArray = [[NSMutableArray alloc] initWithCapacity:27];
     
     for (int i = 0; i < 28; i++) {
@@ -133,36 +120,78 @@
         [retArray addObject:letterContacts];
     }
     
-    for (int i = 0; i < allAccudialContacts.count; i++) {
-        ABRecordRef record = (__bridge ABRecordRef)([allAccudialContacts objectAtIndex:i]);
+    if (ABAddressBookGetGroupCount(ab) > 0) {
+        CFArrayRef groups = ABAddressBookCopyArrayOfAllGroups(ab);
         
-        ABRecordID recordID = ABRecordGetRecordID(record);
+        int arraySize = groups!=NULL?CFArrayGetCount(groups):0;
         
-        Contact *contact = [Contact contactForRecordID:recordID];
-        if(!contact) {
-            contact = (Contact *)[Contact instance:NO];
-            NSString *fName = (__bridge NSString *)(ABRecordCopyValue(record, kABPersonFirstNameProperty));
-            NSString *lName = (__bridge NSString *)(ABRecordCopyValue(record, kABPersonFirstNameProperty));
-            contact.fName = fName;
-            contact.lName = lName;
-            contact.recordID = [NSNumber numberWithInt:recordID];
+        NSString *accudialGroup = @"Accudial";
+        
+        CFMutableArrayRef accudialContacts = CFArrayCreateMutable(kCFAllocatorDefault, 0, NULL);
+        
+        //iterate each group
+        for (int i = 0; i < arraySize-1; i++) {
+            ABRecordRef record = CFArrayGetValueAtIndex(groups, i);
+            CFStringRef* groupName = (CFStringRef *) ABRecordCopyValue(record, kABGroupNameProperty);
+            NSString *nsGroupName = (NSString *) CFBridgingRelease(groupName);
+            
+            if(nsGroupName && [accudialGroup isEqualToString:nsGroupName]){
+                NSLog(@"isEqual");
+                CFArrayRef allContactsInGroup = ABGroupCopyArrayOfAllMembers(record);
+                for (int i = 0; i < CFArrayGetCount(allContactsInGroup) - 1; i++) {
+                    ABRecordRef groupRecord = CFArrayGetValueAtIndex(allContactsInGroup, i);
+                    CFArrayAppendValue(accudialContacts, groupRecord);
+                }
+            }
         }
         
-        char lNameChar =  [[contact.lName lowercaseString] characterAtIndex:0];
-        int index = (int) lNameChar;
+        //Sort Contacts
+        CFArraySortValues(
+                          accudialContacts,
+                          CFRangeMake(0, CFArrayGetCount(accudialContacts)),
+                          (CFComparatorFunction) ABPersonComparePeopleByName,
+                          (void*) ABPersonGetSortOrdering()
+                          );
         
-        if (index > 95 && index < 123) {
-            index = index - 97;
-        } else {
-            index = 27;
+        NSArray *allAccudialContacts = (__bridge NSArray *) accudialContacts;
+        
+        for (int i = 0; i < allAccudialContacts.count; i++) {
+            ABRecordRef record = (__bridge ABRecordRef)([allAccudialContacts objectAtIndex:i]);
+            
+            ABRecordID recordID = ABRecordGetRecordID(record);
+            
+            Contact *contact = [Contact contactForRecordID:recordID];
+            if(!contact) {
+                contact = (Contact *)[Contact instance:NO];
+                NSString *fName = (__bridge NSString *)(ABRecordCopyValue(record, kABPersonFirstNameProperty));
+                NSString *lName = (__bridge NSString *)(ABRecordCopyValue(record, kABPersonFirstNameProperty));
+                contact.fName = fName;
+                contact.lName = lName;
+                contact.recordID = [NSNumber numberWithInt:recordID];
+            }
+            
+            char lNameChar =  [[contact.lName lowercaseString] characterAtIndex:0];
+            int index = (int) lNameChar;
+            
+            if (index > 95 && index < 123) {
+                index = index - 97;
+            } else {
+                index = 27;
+            }
+            
+            NSMutableArray *letterArray = (NSMutableArray *)[retArray objectAtIndex:index];
+            [letterArray addObject:contact];
         }
-        
-        NSMutableArray *letterArray = (NSMutableArray *)[retArray objectAtIndex:index];
-        [letterArray addObject:contact];
+        CFRelease(ab);
+        if (groups!=NULL) {
+            CFRelease(groups);
+        }
+        if(accudialContacts !=NULL){
+            CFRelease(accudialContacts);
+        }
     }
-    CFRelease(ab);
-    CFRelease(groups);
-    CFRelease(accudialContacts);
+    
+    
     
     return retArray;
 }
@@ -219,18 +248,22 @@
     ABAddressBookRef ab = ABAddressBookCreateWithOptions(NULL, &error);
     
     CFArrayRef allGroups = ABAddressBookCopyArrayOfAllGroups(ab);
+    if(allGroups!=NULL){
     for (int i = 0; i < CFArrayGetCount(allGroups); i++) {
         ABRecordRef record = CFArrayGetValueAtIndex(allGroups, i);
         ABAddressBookRemoveRecord(ab, record, &error);
     }
+    }
     
     CFArrayRef allContacts = ABAddressBookCopyArrayOfAllPeople(ab);
+    if(allContacts!=NULL){
     for (int i = 0; i < CFArrayGetCount(allContacts); i++) {
         ABRecordRef record = CFArrayGetValueAtIndex(allContacts, i);
         bool didRemove = ABAddressBookRemoveRecord(ab, record, &error);
         if(!didRemove){
             NSLog(@"Error Deleting Record");
         }
+    }
     }
     ABAddressBookSave(ab, &error);
     CFRelease(ab);
@@ -375,6 +408,11 @@
         [self.delegate ListContactsDidFinishSelecting:retDict];
     }
     
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - UIAlertview Delegate
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     [self.navigationController popViewControllerAnimated:YES];
 }
 

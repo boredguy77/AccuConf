@@ -6,7 +6,7 @@
 #import "Constants.h"
 @protocol ListContactSelectionProtocol;
 
-@interface ListContactsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ListContactsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
 
 @property(nonatomic, strong) id<ListContactSelectionProtocol> delegate;
 @property(nonatomic, strong) IBOutlet UITableView *table;
