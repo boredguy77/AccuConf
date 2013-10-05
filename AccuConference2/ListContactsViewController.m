@@ -12,19 +12,27 @@
     [super viewDidAppear:animated];
     if (ABAddressBookGetAuthorizationStatus() ==
         kABAuthorizationStatusAuthorized) {
+        [self initContactData];
         
-        [self deleteDummyData];
-        [self generateDummyData];
-        self.contacts = [self AllContactsFromDB];
-        self.accudialContacts = [self AccudialContactsFromDB];
-        [self.table reloadData];
+    } else if(ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined){
+        ABAddressBookRef ab = ABAddressBookCreateWithOptions(NULL, NULL);
+        ABAddressBookRequestAccessWithCompletion(ab, ^(bool granted, CFErrorRef error) {
+            [self initContactData];
+        });
     } else {
         self.accudialContacts = [self emptyContactArray];
         self.contacts = [self emptyContactArray];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Database Access denied" message:@"Database Access Denied, Access needed to work with Contacts" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Database Access denied" message:@"Database Access Denied, Give application access in settings in order to use the contacts feature" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
     }
-    
+}
+
+-(void) initContactData{
+    [self deleteDummyData];
+    [self generateDummyData];
+    self.contacts = [self AllContactsFromDB];
+    self.accudialContacts = [self AccudialContactsFromDB];
+    [self.table reloadData];
 }
 
 -(NSArray *) emptyContactArray{
