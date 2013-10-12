@@ -16,6 +16,7 @@
 		090A7A4817FD2C6800B0A273 /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = 090A7A4417FD2C6800B0A273 /* welcome.png */; };
 		090A7A4917FD2C6800B0A273 /* custom.png in Resources */ = {isa = PBXBuildFile; fileRef = 090A7A4517FD2C6800B0A273 /* custom.png */; };
 		090A7A4C17FD2E9000B0A273 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090A7A4B17FD2E9000B0A273 /* InfoViewController.m */; };
+		090A7A4E1809A32F00B0A273 /* blueRadio.png in Resources */ = {isa = PBXBuildFile; fileRef = 090A7A4D1809A32F00B0A273 /* blueRadio.png */; };
 		09395E7D17F26DC7000B0D4B /* ManagedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 09395E7C17F26DC7000B0D4B /* ManagedModel.m */; };
 		09D7482B17E807D400DC4FD1 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D7482A17E807D400DC4FD1 /* Group.m */; };
 		09D7482E17E810E400DC4FD1 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D7482C17E810E300DC4FD1 /* AddressBook.framework */; };
@@ -87,6 +88,7 @@
 		090A7A4517FD2C6800B0A273 /* custom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custom.png; sourceTree = "<group>"; };
 		090A7A4A17FD2E9000B0A273 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		090A7A4B17FD2E9000B0A273 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		090A7A4D1809A32F00B0A273 /* blueRadio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueRadio.png; sourceTree = "<group>"; };
 		09395E7B17F26DC7000B0D4B /* ManagedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagedModel.h; sourceTree = "<group>"; };
 		09395E7C17F26DC7000B0D4B /* ManagedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagedModel.m; sourceTree = "<group>"; };
 		09D7482917E807D400DC4FD1 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
@@ -185,13 +187,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		090A7A3E17FD213400B0A273 /* Autoscroller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Autoscroller;
-			sourceTree = "<group>";
-		};
 		09FEA4E417C9A29300958A17 = {
 			isa = PBXGroup;
 			children = (
@@ -275,7 +270,6 @@
 		09FEA51D17C9A2E300958A17 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				090A7A3E17FD213400B0A273 /* Autoscroller */,
 				09FEA50A17C9A29300958A17 /* MainStoryboard.storyboard */,
 				09FEA56617C9BC6700958A17 /* ConferenceLineRow.xib */,
 				09FEA58417CD0D0800958A17 /* SingleImageLeftSingleLineTextCell.h */,
@@ -313,6 +307,7 @@
 		09FEA51F17C9A2F000958A17 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				090A7A4D1809A32F00B0A273 /* blueRadio.png */,
 				090A7A4217FD2C6800B0A273 /* AccuConferenceLogoWhite.png */,
 				090A7A4317FD2C6800B0A273 /* AccuConferenceLogoWhite_small.png */,
 				090A7A4417FD2C6800B0A273 /* welcome.png */,
@@ -510,6 +505,7 @@
 				09FEA57317C9CD9200958A17 /* createConferenceRed.png in Resources */,
 				09FEA57817CC237C00958A17 /* CreateGroupButton.png in Resources */,
 				090A7A4817FD2C6800B0A273 /* welcome.png in Resources */,
+				090A7A4E1809A32F00B0A273 /* blueRadio.png in Resources */,
 				090A7A4917FD2C6800B0A273 /* custom.png in Resources */,
 				09FEA57A17CC261D00958A17 /* addButtonBlue.png in Resources */,
 				09FEA57D17CC2A0600958A17 /* deleteButtonRed.png in Resources */,

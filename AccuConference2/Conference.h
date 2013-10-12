@@ -33,4 +33,8 @@
 - (void)addParticipants:(NSOrderedSet *)values;
 - (void)removeParticipants:(NSOrderedSet *)values;
 
+-(NSString *)dateString;
+-(NSString *) monthDayYearString;
+-(NSString *) timeString;
+
 @end

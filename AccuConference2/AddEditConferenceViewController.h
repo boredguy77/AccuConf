@@ -1,7 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "Conference.h"
 #import "ListConferenceContactsViewController.h"
-#import "AddEditConferenceViewController.h"
 #import "ConferenceLine.h"
 
 @interface AddEditConferenceViewController : UIViewController {

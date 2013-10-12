@@ -21,5 +21,6 @@
 - (void)removeConferencesObject:(NSManagedObject *)value;
 - (void)addConferences:(NSSet *)values;
 - (void)removeConferences:(NSSet *)values;
+- (NSString *)numberToURL;
 
 @end

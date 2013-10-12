@@ -48,4 +48,54 @@ static NSString *modelName = @"Conference";
     entity = ety;
 }
 
+-(NSString *)getEndDateString{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+	[formatter setDateFormat:@"hh:mm a ' ' EEE MM/dd/YY"];
+	NSString *dateString = [formatter stringFromDate:self.endTime];
+    if (dateString==nil) {
+        dateString=@"No Date";
+    }
+	return dateString;
+}
+
+-(NSString *)dateString{
+	NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+	[formatter setDateFormat:@"hh:mm a ' ' EEE MM/dd/YY"];
+	NSString *dateString = [formatter stringFromDate:self.startTime];
+    if (dateString==nil) {
+        dateString=@"No Date";
+    }
+	return dateString;
+}
+
+-(NSString *) monthDayYearString{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+	[formatter setDateFormat:@"EEE MM/dd/YY"];
+	NSString *dateString = [formatter stringFromDate:self.startTime];
+    if (dateString==nil) {
+        dateString=@"No Date";
+    }
+	return dateString;
+}
+
+-(NSString *) timeString{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    //	[formatter setDateFormat:@"hh:mm a"];
+    
+    formatter.PMSymbol = @"pm";
+    formatter.AMSymbol = @"am";
+    
+	[formatter setDateFormat:@"hh:mma"];
+	NSString *dateString = [formatter stringFromDate:self.startTime];
+    
+    NSTimeZone *time = [NSTimeZone localTimeZone];
+//    NSString *abbr = [time abbreviation];
+    
+    if (dateString==nil) {
+        dateString=@"No Date";
+    }
+//    else dateString = [dateString stringByAppendingFormat:@" %@",abbr];
+	return dateString;
+}
+
 @end

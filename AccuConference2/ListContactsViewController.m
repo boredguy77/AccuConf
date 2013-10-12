@@ -8,18 +8,23 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupsChanged:) name:GROUPS_MODIFIED object:nil];
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     if (ABAddressBookGetAuthorizationStatus() ==
         kABAuthorizationStatusAuthorized) {
         [self initContactData];
-        
-    } else if(ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined){
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    if(ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined){
         ABAddressBookRef ab = ABAddressBookCreateWithOptions(NULL, NULL);
         ABAddressBookRequestAccessWithCompletion(ab, ^(bool granted, CFErrorRef error) {
             [self initContactData];
         });
-    } else {
+    } else  if(ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied || ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusRestricted){
         self.accudialContacts = [self emptyContactArray];
         self.contacts = [self emptyContactArray];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Database Access denied" message:@"Database Access Denied, Give application access in settings in order to use the contacts feature" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
@@ -32,6 +37,7 @@
     [self generateDummyData];
     self.contacts = [self AllContactsFromDB];
     self.accudialContacts = [self AccudialContactsFromDB];
+    self.groups = [self AllGroups];
     [self.table reloadData];
 }
 
@@ -73,23 +79,21 @@
         
         
         for (int i = 0; i < allPeople.count; i++) {
-            CFErrorRef err;
             ABRecordRef record = (__bridge ABRecordRef)([allPeople objectAtIndex:i]);
-            ABAddressBookRemoveRecord(ab, record, &err);
             ABRecordID recordID = ABRecordGetRecordID(record);
             NSLog(@"contact");
             Contact *contact = [Contact contactForRecordID:recordID];
             if(!contact) {
                 contact = (Contact *)[Contact instance:YES];
+                
                 NSString *fName = (__bridge NSString *)(ABRecordCopyValue(record, kABPersonFirstNameProperty));
                 NSString *lName = (__bridge NSString *)(ABRecordCopyValue(record, kABPersonFirstNameProperty));
+                
                 contact.fName = fName;
                 contact.lName = lName;
                 contact.recordID = [NSNumber numberWithInt:recordID];
-                [Contact save:nil];
+                [Contact save:contact];
             }
-            
-            NSLog(@" end contact");
             
             char lNameChar =  [[contact.lName lowercaseString] characterAtIndex:0] ;
             
@@ -104,9 +108,7 @@
             NSMutableArray *letterArray = (NSMutableArray *)[retContacts objectAtIndex:index];
             [letterArray addObject:contact];
             
-            
         }
-        
         
         CFRelease(ab);
         CFRelease(people);
@@ -204,6 +206,27 @@
     return retArray;
 }
 
+-(NSArray *)AllGroups{
+    NSArray *retGroups = [self emptyContactArray];
+    NSArray *groups = [Group all];
+    
+    for (Group *group in groups) {
+        if(group.name.length > 0){
+            unichar letter = [[group.name uppercaseString ]characterAtIndex:0];
+            NSLog(@"unichar : %i", letter);
+            int index = 26;
+            if (letter > 64 && letter < 91) {
+                index = letter - 65;
+            }
+            
+            NSMutableArray *letterArray = (NSMutableArray *)[retGroups objectAtIndex:index];
+            [letterArray addObject:group];
+        }
+    }
+    
+    return retGroups;
+}
+
 -(int)indexForLetter:(char *)letter {
     int index = (int) &letter;
     index = index - 96;
@@ -289,13 +312,19 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     UIImageView *image = (UIImageView *)[cell viewWithTag:2];
+    Contact *contact;
     
     if(self.segmentedControl.selectedSegmentIndex == 0) {
-        Contact *contact =  (Contact *)[(NSArray *) [self.accudialContacts objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-        contact.selected = !contact.selected;
-        image.hidden = !contact.selected;
+        contact =  (Contact *)[(NSArray *) [self.accudialContacts objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     } else if(self.segmentedControl.selectedSegmentIndex == 1) {
-        Contact *contact =  (Contact *)[(NSArray *) [self.contacts objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        contact =  (Contact *)[(NSArray *) [self.contacts objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    } else {
+        Group *group = (Group *) [self.groups objectAtIndex:indexPath.row];
+        group.selected = !group.selected;
+        image.hidden = !group.selected;
+    }
+    
+    if(self.segmentedControl.selectedSegmentIndex != 2) {
         contact.selected = !contact.selected;
         image.hidden = !contact.selected;
     }
@@ -304,23 +333,29 @@
 #pragma mark - TableView Datasource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     NSLog(@"numberOfSectionsInTableView");
-    return self.contacts.count;
+//    if(self.segmentedControl.selectedSegmentIndex == 2){
+//        return self.groups.count;
+//    } else {
+//        return 27;
+//    }
+    return 27.0;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if(self.segmentedControl.selectedSegmentIndex == 0) {
-        if([[self.contacts objectAtIndex:section] count] > 0){
-            return 30.0;
-        } else {
-            return 0.0;
-        }
-    } else {
-        if([[self.accudialContacts objectAtIndex:section] count] > 0){
-            return 30.0;
-        } else {
-            return 0.0;
-        }
-    }
+//    if(self.segmentedControl.selectedSegmentIndex == 0) {
+//        if([[self.contacts objectAtIndex:section] count] > 0){
+//            return 30.0;
+//        } else {
+//            return 0.0;
+//        }
+//    } else {
+//        if([[self.accudialContacts objectAtIndex:section] count] > 0){
+//            return 30.0;
+//        } else {
+//            return 0.0;
+//        }
+//    }
+    return 30;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
@@ -332,7 +367,7 @@
     } else {
         header = @"#";
     }
-    NSLog(@"%@", header);
+    NSLog(@"header : %@", header);
     return header;
 }
 
@@ -341,26 +376,45 @@
     UILabel *title = (UILabel *) [cell viewWithTag:1];
     UIImageView *check = (UIImageView *)[cell viewWithTag:2];
     
-    NSMutableArray *array;
+    NSArray *array;
     
     if(self.segmentedControl.selectedSegmentIndex == 0) {
-        array =  (NSMutableArray *) [self.accudialContacts objectAtIndex:indexPath.section];
+        array =  (NSArray *) [self.accudialContacts objectAtIndex:indexPath.section];
+    } else if(segmentedControl.selectedSegmentIndex == 1){
+        array =  (NSArray *) [self.contacts objectAtIndex:indexPath.section];
     } else {
-        array =  (NSMutableArray *) [self.contacts objectAtIndex:indexPath.section];
+        array = (NSArray *) [self.groups objectAtIndex:indexPath.section];
     }
 
-    Contact *contact = (Contact *) [array objectAtIndex:indexPath.row];
-    title.text = [NSString stringWithFormat:@"%@ %@",contact.fName, contact.lName];
-    check.hidden = !contact.selected;
+    if(self.segmentedControl.selectedSegmentIndex!=2){
+        Contact *contact = (Contact *) [array objectAtIndex:indexPath.row];
+        title.text = [NSString stringWithFormat:@"%@ %@",contact.fName, contact.lName];
+        check.hidden = !contact.selected;
+    } else {
+        Group *group = (Group*) [array objectAtIndex:indexPath.row];
+        title.text = group.name;
+        check.hidden = !group.selected;
+    }
+    
     NSLog(@"cellForRowAtIndexPath");
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if(self.segmentedControl.selectedSegmentIndex == 0) {
-        return [(NSArray *) [self.accudialContacts objectAtIndex:section] count];
-    } else {
-        return [(NSArray *) [self.contacts objectAtIndex:section] count];
+    switch (self.segmentedControl.selectedSegmentIndex) {
+        case 0:
+            return [(NSArray *) [self.accudialContacts objectAtIndex:section] count];
+            break;
+        case 1:
+            return [(NSArray *) [self.contacts objectAtIndex:section] count];
+            break;
+        case 2:
+            return [(NSArray *) [self.groups objectAtIndex:section] count];;
+            break;
+            
+        default:
+            return 0;
+            break;
     }
 }
 
@@ -380,13 +434,13 @@
 }
 
 -(void)donePressed{
-    NSMutableArray *selectedContacts = [[NSMutableArray alloc] init];
+    NSMutableArray *retContacts = [[NSMutableArray alloc] init];
     NSMutableArray *selectedGroups = [[NSMutableArray alloc] init];
     if(self.accudialContacts){
     for (NSArray *letterArray in self.accudialContacts) {
         for (Contact *contact in letterArray) {
             if(contact.selected){
-                [selectedContacts addObject:contact];
+                [retContacts addObject:contact];
                 contact.selected = NO;
             }
         }
@@ -397,20 +451,24 @@
     for (NSArray *letterArray in self.contacts) {
         for (Contact *contact in letterArray) {
             if(contact.selected){
-                [selectedContacts addObject:contact];
+                [retContacts addObject:contact];
                 contact.selected = NO;
             }
         }
     }
     }
+    
     if(self.groups){
-    for (Group *group in self.groups) {
-        if(group.selected){
-            [selectedGroups addObject:group];
-            group.selected = NO;
+        for (NSArray *letterArray in self.groups) {
+            for (Group *group in letterArray) {
+                if(group.selected){
+                    [selectedGroups addObject:group];
+                    group.selected = NO;
+                }
+            }
         }
     }
-    }
+    
     NSDictionary *retDict = [NSDictionary dictionaryWithObjectsAndKeys:selectedContacts, @"selectedContacts", selectedGroups, @"selectedGroups", nil];
     if(self.delegate && [self.delegate respondsToSelector:@selector(ListContactsDidFinishSelecting:)]){
         [self.delegate ListContactsDidFinishSelecting:retDict];

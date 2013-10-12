@@ -1183,7 +1183,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="You don't have any conference lines set up yet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="fiw-AA-Wsk">
-                                <rect key="frame" x="20" y="8" width="280" height="190"/>
+                                <rect key="frame" x="20" y="7.9999999999999991" width="280" height="190"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                 <color key="textColor" red="0.3490196168422699" green="0.3490196168422699" blue="0.3490196168422699" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1403,6 +1403,35 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="sGP-MO-55Z"/>
                                 </constraints>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="conferenceRow" id="uxS-6a-caN">
+                                        <rect key="frame" x="0.0" y="22" width="280" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uxS-6a-caN" id="axs-eV-KSQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="22:22pm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1w-Ie-TO3">
+                                                    <rect key="frame" x="35" y="11" width="56" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blueRadio.png" translatesAutoresizingMaskIntoConstraints="NO" id="9XQ-3d-SVw">
+                                                    <rect key="frame" x="12" y="14" width="15" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRA-gq-fYc">
+                                                    <rect key="frame" x="99" y="11" width="149" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="FpI-qY-g34" id="5IE-Dz-fUu"/>
                                     <outlet property="delegate" destination="FpI-qY-g34" id="dSE-bL-Nnn"/>
@@ -1462,11 +1491,12 @@
                         <outlet property="shareLineButton" destination="Ju9-QR-Uen" id="PvC-L3-3wM"/>
                         <outlet property="table" destination="cUi-S8-jXz" id="1oV-jR-yxT"/>
                         <segue destination="3cs-Pl-CRo" kind="push" identifier="toAddEditConferenceLine" id="4mc-6t-FDt"/>
+                        <segue destination="mqk-1A-lW0" kind="push" identifier="toAddEditConference" id="X3X-cu-7KU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fHW-NW-Pbb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2069" y="-1245"/>
+            <point key="canvasLocation" x="2061" y="-1349"/>
         </scene>
         <!--Add Edit Conference View Controller - Create Conference-->
         <scene sceneID="8wA-vP-sWb">
@@ -1884,7 +1914,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YxI-3J-aFI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1985" y="-369"/>
+            <point key="canvasLocation" x="2061" y="-369"/>
         </scene>
         <!--Add Edd Conference Lines View Controller - Add New Line-->
         <scene sceneID="0tR-sY-bGr">
@@ -2277,25 +2307,19 @@
     </scenes>
     <resources>
         <image name="ConferenceLine.png" width="299" height="301"/>
-        <image name="ConferenceLine.png" width="299" height="301"/>
         <image name="CreateGroupButton.png" width="1663" height="309"/>
         <image name="addButtonBlue.png" width="249" height="251"/>
-        <image name="addButtonBlue.png" width="249" height="251"/>
-        <image name="addButtonBlue.png" width="249" height="251"/>
+        <image name="blueRadio.png" width="105" height="101"/>
         <image name="calendar.png" width="30" height="30"/>
         <image name="call.png" width="30" height="30"/>
         <image name="callInButton.png" width="1662" height="310"/>
         <image name="callLarge.png" width="320" height="320"/>
-        <image name="callLarge.png" width="320" height="320"/>
-        <image name="conferenceLineDetail.png" width="108" height="108"/>
         <image name="conferenceLineDetail.png" width="108" height="108"/>
         <image name="contacts.png" width="30" height="30"/>
         <image name="createConference.png" width="1661" height="304"/>
         <image name="deleteButtonRed.png" width="352" height="167"/>
         <image name="groups.png" width="320" height="320"/>
         <image name="info.png" width="30" height="30"/>
-        <image name="radio.png" width="217" height="214"/>
-        <image name="radio.png" width="217" height="214"/>
         <image name="radio.png" width="217" height="214"/>
         <image name="shareLine.png" width="1662" height="309"/>
         <image name="slider.png" width="296" height="181"/>
@@ -2307,9 +2331,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="pYj-pU-BNv"/>
+        <segue reference="4mc-6t-FDt"/>
         <segue reference="8qN-EN-Je8"/>
-        <segue reference="Fya-3N-7ce"/>
+        <segue reference="X3X-cu-7KU"/>
         <segue reference="zsI-Px-FiS"/>
     </inferredMetricsTieBreakers>
 </document>

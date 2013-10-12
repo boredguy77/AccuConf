@@ -1,12 +1,5 @@
-//
-//  ConferenceLineDetailViewController.m
-//  AccuConference2
-//
-//  Created by Alex Telford on 8/24/13.
-//  Copyright (c) 2013 Alex Telford. All rights reserved.
-//
-
 #import "ConferenceLineDetailViewController.h"
+
 @implementation ConferenceLineDetailViewController
 
 @synthesize conferenceLine, nameLabel, numberLabel, moderatorLabel, participantLabel, callButton, createConferenceButton, shareLineButton, table;
@@ -69,11 +62,11 @@
 }
 
 -(void)createConferencePressed{
-    
+    [self performSegueWithIdentifier:@"toAddEditConference" sender:self.conferenceLine];
 }
 
 -(void)callInPressed{
-    
+	[[UIApplication sharedApplication] openURL: [NSURL URLWithString:[self.conferenceLine numberToURL]]];
 }
 
 -(void)shareLinePressed{
@@ -82,9 +75,13 @@
 
 #pragma mark - TableView Datasource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-#warning flesh out Conference Rows
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
-    cell.textLabel.text = @"Conference Call Name";
+    UITableViewCell *cell = (UITableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"conferenceRow"];
+    Conference *conference = (Conference *)[self.conferenceLine.conferences objectAtIndex:indexPath.row];
+    UILabel *timeLabel = (UILabel *) [cell viewWithTag:2];
+    UILabel *titleLabel = (UILabel *) [cell viewWithTag:3];
+    timeLabel.text = [conference timeString];
+    titleLabel.text = conference.name;
+    
     return cell;
 }
 
@@ -105,6 +102,9 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.destinationViewController isKindOfClass:[AddEddConferenceLinesViewController class]]){
         AddEddConferenceLinesViewController *addEditController = (AddEddConferenceLinesViewController*) segue.destinationViewController;
+        addEditController.conferenceLine = (ConferenceLine *) sender;
+    } else if([segue.destinationViewController isKindOfClass:[AddEditConferenceViewController class]]){
+        AddEditConferenceViewController *addEditController = (AddEditConferenceViewController *)segue.destinationViewController;
         addEditController.conferenceLine = (ConferenceLine *) sender;
     }
 }

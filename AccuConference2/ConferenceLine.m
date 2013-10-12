@@ -39,4 +39,28 @@ static NSString *modelName = @"ConferenceLine";
     entity = ety;
 }
 
+-(NSString *)numberToURL{
+    NSString *tmpNumber, *tmpCode, *tmpSuffix;
+    if (!self.number){
+        tmpNumber = @"";
+    } else {
+        tmpNumber = self.number;
+    }
+    
+    if(self.moderatorCode && ![self.moderatorCode isEqualToString:@""]){
+        tmpCode = self.moderatorCode;
+    } else if(!self.participantCode){
+        tmpCode = self.participantCode;
+    } else {
+        tmpCode = @"";
+    }
+    
+    if (!self.suffix) {
+        tmpSuffix = @"";
+    } else {
+        tmpSuffix = self.suffix;
+    }
+    
+    return [NSString stringWithFormat:@"tel:%@,%@,%@",tmpNumber,tmpCode,tmpSuffix];
+}
 @end
