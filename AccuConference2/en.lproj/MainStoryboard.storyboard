@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QQ9-Oq-g4D">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QQ9-Oq-g4D">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -548,7 +548,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHv-XQ-rkh" customClass="RoundRectButton">
-                                <rect key="frame" x="20" y="140.5" width="43" height="43"/>
+                                <rect key="frame" x="20" y="141" width="43" height="43"/>
                                 <color key="backgroundColor" red="0.19215688109397888" green="0.50980395078659058" blue="0.7137255072593689" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="43" id="Ks5-5f-khi"/>
@@ -568,8 +568,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="LcK-Te-0AP">
-                                <rect key="frame" x="0.0" y="117" width="320" height="338"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="LcK-Te-0AP">
+                                <rect key="frame" x="0.0" y="117" width="320" height="190"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="338" id="AsB-Kq-Jed"/>
@@ -579,20 +579,39 @@
                                     <outlet property="delegate" destination="xg6-1B-CxC" id="0hM-fo-clH"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bp-fX-UrY" customClass="RoundRectButton">
+                                <rect key="frame" x="20" y="386" width="280" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.91764712329999998" green="0.2117647231" blue="0.231372565" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Qvt-th-GPH"/>
+                                </constraints>
+                                <state key="normal" title="DELETE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deletePressed" destination="xg6-1B-CxC" eventType="touchUpInside" id="RG7-Ix-FSE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="0bp-fX-UrY" firstAttribute="top" secondItem="LcK-Te-0AP" secondAttribute="bottom" constant="8" symbolic="YES" id="0NS-GR-3Ml"/>
                             <constraint firstItem="LcK-Te-0AP" firstAttribute="top" secondItem="kHv-XQ-rkh" secondAttribute="bottom" constant="8" symbolic="YES" id="4sC-Yi-sXe"/>
                             <constraint firstAttribute="trailing" secondItem="hgA-zT-nFX" secondAttribute="trailing" constant="20" symbolic="YES" id="99f-xp-B4p"/>
+                            <constraint firstItem="2gM-04-hOE" firstAttribute="top" secondItem="LcK-Te-0AP" secondAttribute="bottom" constant="60" id="FHU-cS-Xl9"/>
                             <constraint firstItem="hgA-zT-nFX" firstAttribute="leading" secondItem="xGN-2S-eLK" secondAttribute="leading" constant="20" symbolic="YES" id="Gye-AB-CcU"/>
                             <constraint firstItem="LcK-Te-0AP" firstAttribute="leading" secondItem="xGN-2S-eLK" secondAttribute="leading" id="NSC-0u-xUG"/>
+                            <constraint firstItem="0bp-fX-UrY" firstAttribute="leading" secondItem="xGN-2S-eLK" secondAttribute="leading" constant="20" symbolic="YES" id="OoL-UH-2tc"/>
                             <constraint firstItem="hgA-zT-nFX" firstAttribute="top" secondItem="xGN-2S-eLK" secondAttribute="top" constant="20" symbolic="YES" id="Rdf-bN-DwP"/>
+                            <constraint firstAttribute="trailing" secondItem="0bp-fX-UrY" secondAttribute="trailing" constant="20" symbolic="YES" id="XyL-b8-cms"/>
                             <constraint firstItem="C8l-SP-dhk" firstAttribute="centerY" secondItem="kHv-XQ-rkh" secondAttribute="centerY" id="aGJ-Pg-U05"/>
-                            <constraint firstItem="LcK-Te-0AP" firstAttribute="bottom" secondItem="xGN-2S-eLK" secondAttribute="bottom" id="dJ9-ak-pNA"/>
                             <constraint firstAttribute="trailing" secondItem="C8l-SP-dhk" secondAttribute="trailing" constant="20" symbolic="YES" id="gpF-aJ-nl3"/>
                             <constraint firstItem="C8l-SP-dhk" firstAttribute="leading" secondItem="kHv-XQ-rkh" secondAttribute="trailing" constant="8" symbolic="YES" id="k3q-AZ-pwL"/>
                             <constraint firstItem="LcK-Te-0AP" firstAttribute="trailing" secondItem="xGN-2S-eLK" secondAttribute="trailing" id="pvi-Ou-6Cp"/>
                             <constraint firstItem="kHv-XQ-rkh" firstAttribute="leading" secondItem="xGN-2S-eLK" secondAttribute="leading" constant="20" symbolic="YES" id="ubW-YM-dKV"/>
+                            <constraint firstItem="0bp-fX-UrY" firstAttribute="top" secondItem="LcK-Te-0AP" secondAttribute="bottom" constant="8" id="z6g-nQ-QQg"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -604,6 +623,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="deleteButton" destination="0bp-fX-UrY" id="MCH-BC-mbq"/>
                         <outlet property="nameField" destination="hgA-zT-nFX" id="YQt-97-6wJ"/>
                         <outlet property="table" destination="LcK-Te-0AP" id="nnA-hr-wjf"/>
                         <segue destination="aMV-1P-PMs" kind="push" identifier="toListContacts" id="mxC-yB-AGU"/>
@@ -2331,9 +2351,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="4mc-6t-FDt"/>
         <segue reference="8qN-EN-Je8"/>
         <segue reference="X3X-cu-7KU"/>
-        <segue reference="zsI-Px-FiS"/>
+        <segue reference="4mc-6t-FDt"/>
+        <segue reference="mxC-yB-AGU"/>
     </inferredMetricsTieBreakers>
 </document>

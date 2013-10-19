@@ -1,7 +1,7 @@
 #import "AddEditGroupViewController.h"
 
 @implementation AddEditGroupViewController
-@synthesize nameField, contacts, group;
+@synthesize nameField, contacts, group, deleteButton;
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -19,6 +19,11 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if(self.group){
+        self.deleteButton.hidden = NO;
+    } else {
+        self.deleteButton.hidden = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning{
@@ -49,6 +54,11 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)deletePressed{
+    [Group remove:self.group];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.destinationViewController isKindOfClass:[ListContactsViewController class]]){
@@ -59,8 +69,8 @@
 }
 
 #pragma mark - ListContactSelection Protocol
--(void)ListContactsDidFinishSelecting:(NSDictionary *)dict{
-    
+-(void)listContactsDidFinishSelecting:(NSDictionary *)dict{
+    NSLog(@"listContactsDidFinishSelecting");
     NSArray *selectedContacts = (NSArray *) [dict objectForKey:@"selectedContacts"];
     
     self.contacts = selectedContacts;

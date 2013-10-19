@@ -10,9 +10,10 @@
 @property(nonatomic, strong) NSArray *contacts;
 @property(nonatomic, strong) Group *group;
 @property(nonatomic, strong) IBOutlet UITableView *table;
+@property(nonatomic, strong) IBOutlet UIButton *deleteButton;
 
 -(IBAction)addContactPressed;
 -(IBAction)savePressed;
--(void)groupsModified:(NSNotification *)notification;
+-(IBAction)deletePressed;
 
 @end

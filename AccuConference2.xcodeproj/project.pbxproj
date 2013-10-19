@@ -18,6 +18,7 @@
 		090A7A4C17FD2E9000B0A273 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090A7A4B17FD2E9000B0A273 /* InfoViewController.m */; };
 		090A7A4E1809A32F00B0A273 /* blueRadio.png in Resources */ = {isa = PBXBuildFile; fileRef = 090A7A4D1809A32F00B0A273 /* blueRadio.png */; };
 		09395E7D17F26DC7000B0D4B /* ManagedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 09395E7C17F26DC7000B0D4B /* ManagedModel.m */; };
+		09BB82811812F69C00E7B35A /* ContactArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BB82801812F69C00E7B35A /* ContactArray.m */; };
 		09D7482B17E807D400DC4FD1 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D7482A17E807D400DC4FD1 /* Group.m */; };
 		09D7482E17E810E400DC4FD1 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D7482C17E810E300DC4FD1 /* AddressBook.framework */; };
 		09D7482F17E810E400DC4FD1 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D7482D17E810E300DC4FD1 /* AddressBookUI.framework */; };
@@ -91,6 +92,8 @@
 		090A7A4D1809A32F00B0A273 /* blueRadio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueRadio.png; sourceTree = "<group>"; };
 		09395E7B17F26DC7000B0D4B /* ManagedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagedModel.h; sourceTree = "<group>"; };
 		09395E7C17F26DC7000B0D4B /* ManagedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagedModel.m; sourceTree = "<group>"; };
+		09BB827F1812F69C00E7B35A /* ContactArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactArray.h; sourceTree = "<group>"; };
+		09BB82801812F69C00E7B35A /* ContactArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactArray.m; sourceTree = "<group>"; };
 		09D7482917E807D400DC4FD1 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
 		09D7482A17E807D400DC4FD1 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		09D7482C17E810E300DC4FD1 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -300,6 +303,8 @@
 				09FEA58217CD06AD00958A17 /* ConferenceLine.m */,
 				09395E7B17F26DC7000B0D4B /* ManagedModel.h */,
 				09395E7C17F26DC7000B0D4B /* ManagedModel.m */,
+				09BB827F1812F69C00E7B35A /* ContactArray.h */,
+				09BB82801812F69C00E7B35A /* ContactArray.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -546,6 +551,7 @@
 				09FEA59617CD67B400958A17 /* SingleImageLeftTitleAndSubTitleCell.m in Sources */,
 				09FEA59D17CE478300958A17 /* ListConferenceContactsViewController.mm in Sources */,
 				09FEA5A017CE4B0E00958A17 /* Contact.m in Sources */,
+				09BB82811812F69C00E7B35A /* ContactArray.m in Sources */,
 				09FEA5A617CE9EE700958A17 /* RootTabController.m in Sources */,
 				09D7482B17E807D400DC4FD1 /* Group.m in Sources */,
 				090A7A4C17FD2E9000B0A273 /* InfoViewController.m in Sources */,

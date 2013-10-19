@@ -25,6 +25,6 @@
 @protocol ListContactSelectionProtocol <NSObject>
 
 @required
--(void)ListContactsDidFinishSelecting:(NSDictionary *)contactsAndGroups;
+-(void)listContactsDidFinishSelecting:(NSDictionary *)contactsAndGroups;
 
 @end
