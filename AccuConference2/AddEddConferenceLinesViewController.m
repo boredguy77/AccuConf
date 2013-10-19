@@ -25,7 +25,7 @@
 -(void)populateUIWithConferenceLine:(ConferenceLine *)line{
     self.title = @"Edit Line";
     self.name.text = line.name;
-    self.number.text = line.number;
+    self.number.text = [ConferenceLine formatStringAsPhoneNumber:line.number];
     self.moderatorCode.text = line.participantCode;
     self.participantCode.text = line.moderatorCode;
     self.suffix.text = line.suffix;
@@ -57,7 +57,7 @@
 
 -(ConferenceLine *)populateFomUI:(ConferenceLine *)line{
     line.name = self.name.text;
-    line.number = self.number.text;
+    line.number = [ConferenceLine scrubPhoneNumber:self.number.text];
     line.suffix = self.suffix.text;
     line.participantCode = self.participantCode.text;
     line.moderatorCode = self.moderatorCode.text;
@@ -87,6 +87,10 @@
     [self clearUIValues];
     [self.navigationController popToRootViewControllerAnimated:YES];
     self.conferenceLine = nil;
+}
+
+-(void)resignFirstResponder:(id)sender{
+    [sender resignFirstResponder];
 }
 
 @end

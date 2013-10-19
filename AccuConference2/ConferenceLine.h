@@ -12,6 +12,11 @@
 @property (nonatomic, retain) NSString * moderatorCode;
 @property (nonatomic, retain) NSOrderedSet *conferences;
 
+- (NSString *)numberToURL;
+
++(NSString *)scrubPhoneNumber:(NSString *)phoneNumberToScrub;
+
++(NSString *)formatStringAsPhoneNumber:(NSString *)number;
 
 @end
 
@@ -21,6 +26,5 @@
 - (void)removeConferencesObject:(NSManagedObject *)value;
 - (void)addConferences:(NSSet *)values;
 - (void)removeConferences:(NSSet *)values;
-- (NSString *)numberToURL;
 
 @end

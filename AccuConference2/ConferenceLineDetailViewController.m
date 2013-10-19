@@ -33,7 +33,7 @@
 -(void)populateUIWithConferenceLine:(ConferenceLine *)line{
     self.title = line.name;
     self.nameLabel.text = line.name;
-    self.numberLabel.text = line.number;
+    self.numberLabel.text = [ConferenceLine formatStringAsPhoneNumber:line.number];
     self.moderatorLabel.text = line.moderatorCode;
     self.participantLabel.text = line.participantCode;
     if(line.conferences.count > 0){
@@ -70,7 +70,13 @@
 }
 
 -(void)shareLinePressed{
+    NSString *body = [NSString stringWithFormat:@"Conference line information has been shared with you.<br /><br /> To join your conference dial the number below and when prompted enter your conference code. <br /><br /> <b>Access Number:</b> %@ <br /> <b>Conference Code:</b> %@ <br /><b>Suffix Code:</b> %@ <br /> Invite sent via AccuDial Conference Dialer.<br /> <br />Setup conferences, add to your calendar, and invite participants from one app. <br /><br /> Powered By:<a href=\"http://www.accuconference.com/mobile.html\"> AccuConference Mobile</a>", [ConferenceLine formatStringAsPhoneNumber:conferenceLine.number], conferenceLine.participantCode, conferenceLine.suffix];
     
+    NSString *mailURL = [[NSString alloc ] initWithFormat:@"mailto:?subject=Conference Line:%@&body=%@",
+                         [conferenceLine.name stringByAddingPercentEscapesUsingEncoding:4],
+                         [body stringByAddingPercentEscapesUsingEncoding:4]];
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mailURL]];
 }
 
 #pragma mark - TableView Datasource
@@ -94,6 +100,7 @@
 }
 
 #pragma mark - TableView Delegate
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

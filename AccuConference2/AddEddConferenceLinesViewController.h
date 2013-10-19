@@ -13,5 +13,6 @@
 
 -(IBAction)saveButtonPressed;
 -(IBAction)deleteButtonPressed;
+-(IBAction)resignFirstResponder:(id)sender;
 
 @end
