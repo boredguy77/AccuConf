@@ -18,7 +18,8 @@ static NSString *modelName = @"Conference";
 @dynamic participants;
 @dynamic addToCalID;
 @dynamic notifyID;
-
+@dynamic isOwnerModerator;
+@dynamic isOwnerParticipant;
 
 -(void)clone:(Conference *)conferenceToCopy{
     self.name = conferenceToCopy.name;
@@ -62,11 +63,16 @@ static NSString *modelName = @"Conference";
 }
 
 +(NSString *)stringFromInterval:(NSDate *)start to:(NSDate *)end{
-    NSCalendar *calendar = [[NSCalendar alloc ] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *startComponents = [calendar components:NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit fromDate:start];
-    NSDateComponents *endComponents = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit fromDate:end];
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    df.PMSymbol = @"pm";
+    df.AMSymbol = @"am";
+    df.dateFormat = @"MMM d, hh:mma";
+    NSString *firstString = [df stringFromDate:start];
     
-    NSString *retString = [NSString stringWithFormat:@"%i/%i: %i:%i-%i:%i",startComponents.month, startComponents.day, startComponents.hour>12?startComponents.hour-12:startComponents.hour,startComponents.minute,endComponents.hour>12?endComponents.hour-12:endComponents.hour, endComponents.minute];
+    df.dateFormat = @"hh:mma";
+    NSString *secondString = [df stringFromDate:end];
+    
+    NSString *retString = [NSString stringWithFormat:@"%@-%@",firstString, secondString];
     return retString;
 }
 
@@ -289,6 +295,28 @@ static NSString *modelName = @"Conference";
 //        }
 //        else return NO;
 //    }
+    return NO;
+}
+
++(NSString *)stringForParticipantsInConference:(Conference *)conference{
+    NSMutableString *retString = [NSMutableString string];
+    for (Contact *contact in conference.moderators) {
+        [retString appendFormat:@"<b>%@:</b> Moderator <br />",contact.fName];
+    }
+    
+    for (Contact *contact in conference.participants) {
+        [retString appendFormat:@"<b>%@</b> (Participant) <br />",contact.fName];
+    }
+    return retString;
+}
+
++(BOOL)validate:(ManagedModel *)managedModel{
+    if ([super validate:managedModel]) {
+        Conference *conference = (Conference *) managedModel;
+        if (conference.conferenceLine && ![conference.name isEqualToString:@""] && conference.startTime && conference.endTime) {
+            return YES;
+        }
+    }
     return NO;
 }
 

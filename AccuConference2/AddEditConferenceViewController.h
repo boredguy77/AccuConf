@@ -11,7 +11,8 @@
     BOOL startImmediately;
     NSDate *startDate, *endDate;
     UITextField *selectedTextField;
-    UILabel *selectedLabel;
+    UIButton *selectedButton;
+    int notifySetting, repeatSetting;
 }
 
 @property (nonatomic, strong) Conference *conference;
@@ -29,8 +30,8 @@
 @property(nonatomic, strong) IBOutlet UIButton *immediateConferenceButton;
 @property(nonatomic, strong) IBOutlet UIButton *scheduleConferenceButton;
 @property(nonatomic, strong) IBOutlet UISwitch *addToCalSwitch;
-@property(nonatomic, strong) IBOutlet UILabel *repeatLabel;
-@property(nonatomic, strong) IBOutlet UILabel *notifyLabel;
+@property(nonatomic, strong) IBOutlet UIButton *repeatButton;
+@property(nonatomic, strong) IBOutlet UIButton *notifyButton;
 @property(nonatomic, strong) IBOutlet UIView *scheduleView;
 @property(nonatomic, strong) IBOutlet UIButton *deleteButton;
 @property(nonatomic, strong) IBOutlet UIDatePicker *datePicker;
@@ -38,6 +39,7 @@
 @property(nonatomic, strong) IBOutlet UIScrollView *scrollview;
 @property(nonatomic, strong) IBOutlet UIView *pickerView;
 @property(nonatomic, strong) IBOutlet UIPickerView *picker;
+@property(nonatomic, strong) IBOutlet NSLayoutConstraint *deleteConstraint;
 @property BOOL isDatePickerShowing;
 @property BOOL isDeleteShowing;
 @property BOOL isPickerShowing;

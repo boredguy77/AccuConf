@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "ManagedModel.h"
+#import "Contact.h"
 
 @class Conference;
 @class ConferenceLine;
@@ -37,6 +38,8 @@ enum {
 @property (nonatomic, retain) ConferenceLine *conferenceLine;
 @property (nonatomic, retain) NSOrderedSet *moderators;
 @property (nonatomic, retain) NSOrderedSet *participants;
+@property (nonatomic, retain) NSNumber *isOwnerModerator;
+@property (nonatomic, retain) NSNumber *isOwnerParticipant;
 
 +(NSArray *) conferencesToday;
 +(NSArray *) conferencesThisMonth;
@@ -45,6 +48,8 @@ enum {
 
 +(NSString *) stringForNotify:(int)notice;
 +(NSString *) stringForRepeatType:(int)interval;
+
++(NSString *) stringForParticipantsInConference:(Conference *)conference;
 
 -(NSString *) dateString;
 -(NSString *) monthDayYearString;

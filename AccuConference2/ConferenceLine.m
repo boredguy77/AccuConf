@@ -90,4 +90,14 @@ static NSString *modelName = @"ConferenceLine";
 	}
 	return number;
 }
+
++(BOOL)validate:(ManagedModel *)managedModel{
+    if ([super validate:managedModel]) {
+        ConferenceLine *conferenceLine = (ConferenceLine *) managedModel;
+        if (![conferenceLine.number isEqualToString:@""] && ![conferenceLine.name isEqualToString:@""]) {
+            return YES;
+        }
+    }
+    return NO;
+}
 @end

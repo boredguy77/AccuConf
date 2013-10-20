@@ -106,7 +106,7 @@ static NSString *modelName = @"ManagedModel";
 }
 
 +(BOOL)validate:(ManagedModel *)managedModel{
-    return managedModel != nil;
+    return managedModel != nil && [managedModel isMemberOfClass:[self class]];
 }
 
 +(void)dispatchAll{

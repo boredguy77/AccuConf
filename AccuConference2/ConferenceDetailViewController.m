@@ -49,7 +49,7 @@
     self.notifyLabel.text = [Conference stringForNotify:conf.notify.intValue];
     self.addToCalendarLabel.text = conf.addToCal.boolValue?@"YES":@"NO";
     
-    NSString *contactHTML = @"<b>Me:</b> Moderator";
+    NSString *contactHTML = [Conference stringForParticipantsInConference:conf];
     [self.contactWebView loadHTMLString:contactHTML baseURL:nil];
 }
 

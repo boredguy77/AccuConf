@@ -71,10 +71,16 @@
             self.conferenceLine = (ConferenceLine *) [ConferenceLine instance:YES];
         }
         [self populateFomUI:self.conferenceLine];
-        [ConferenceLine save:self.conferenceLine];
-        [self clearUIValues];
-        self.conferenceLine = nil;
-        [self.navigationController popViewControllerAnimated:YES];
+        if ([ConferenceLine validate:self.conferenceLine]) {
+            [ConferenceLine save:self.conferenceLine];
+            [self clearUIValues];
+            self.conferenceLine = nil;
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+#warning write validation handling
+            NSLog(@"conferenceLine didn't pass validation");
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
         
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid Conference Line" message:@"One or more of the values entered for the conference line is invalid." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];

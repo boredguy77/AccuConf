@@ -2,20 +2,21 @@
 #import "Conference.h"
 #import "Contact.h"
 #import "Constants.h"
+#import "ListContactsViewController.h"
 
-@interface ListConferenceContactsViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ListConferenceContactsViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, ListContactSelectionProtocol> {
+    NSMutableArray *selectedArray;
+    BOOL isSelfModerator;
+    BOOL isSelfParticipant;
+}
 
 @property(nonatomic, strong)Conference *conference;
-@property(nonatomic, strong)NSDictionary *conferenceDictionary;
-
 @property(nonatomic, strong)IBOutlet UITableView *table;
 @property(nonatomic, strong)NSMutableArray *moderators;
 @property(nonatomic, strong)NSMutableArray *participants;
 
 -(void)addModeratorPressed;
 -(void)addParticipantPressed;
--(void)addYourselfModeratorPressed;
--(void)addYourselfParticipantPressed;
 -(void)deleteModerator:(id)sender;
 -(void)deleteParticipant:(id)sender;
 

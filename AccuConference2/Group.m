@@ -31,4 +31,13 @@ static NSString *modelName = @"Group";
     entity = ety;
 }
 
++(BOOL)validate:(ManagedModel *)managedModel{
+    if ([super validate:managedModel]) {
+        Group *group = (Group *) managedModel;
+        if (![group.name isEqualToString:@""] && group.contacts.count > 0) {
+            return YES;
+        }
+    }
+    return NO;
+}
 @end
