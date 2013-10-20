@@ -21,8 +21,10 @@
     [super viewWillAppear:animated];
     if(self.group){
         self.deleteButton.hidden = NO;
+        self.nameField.text= self.group.name;
     } else {
         self.deleteButton.hidden = YES;
+        self.nameField.text = @"";
     }
 }
 
@@ -42,16 +44,22 @@
         grp = self.group;
     } else {
         grp = (Group *)[Group instance:YES];
+        self.group = grp;
     }
     grp.name = self.nameField.text;
     grp.contacts = [NSSet setWithArray:self.contacts];
-    [Group save:grp];
-    
-    
-    self.nameField.text = @"";
-    self.contacts = nil;
-    self.group = nil;
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([Group validate:grp]) {
+        [Group save:grp];
+        
+        
+        self.nameField.text = @"";
+        self.contacts = nil;
+        self.group = nil;
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        NSLog(@"group validation");
+        [[[UIAlertView alloc] initWithTitle:@"Not Valid" message:@"You are missing one or more required fields. Please Make sure you have a number and at least one contact for this Group" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
+    }
 }
 
 -(void)deletePressed{

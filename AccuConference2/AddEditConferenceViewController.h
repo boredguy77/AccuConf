@@ -52,5 +52,6 @@
 -(IBAction)datePickerDonePressed;
 -(IBAction)pickerDonePressed;
 -(IBAction)pickerFieldPressed:(id)sender;
+-(IBAction)resignFirstResponder;
 
 @end

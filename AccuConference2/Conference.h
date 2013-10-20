@@ -51,6 +51,8 @@ enum {
 
 +(NSString *) stringForParticipantsInConference:(Conference *)conference;
 
++(void) scheduleConferenceNotifications;
+
 -(NSString *) dateString;
 -(NSString *) monthDayYearString;
 -(NSString *) timeString;

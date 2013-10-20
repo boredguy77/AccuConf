@@ -251,6 +251,55 @@ static NSString *modelName = @"Conference";
     }
 }
 
++(void)scheduleConferenceNotifications{
+    NSArray *all = [self all];
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    for (Conference *conference in all) {
+        UILocalNotification *notification = [[UILocalNotification alloc]init];
+        
+        NSDate *fireDate = conference.startTime;
+        
+        switch (conference.notify.intValue) {
+            case 1:
+                fireDate = [fireDate dateByAddingTimeInterval:-900];
+                break;
+            case 2:
+                fireDate = [fireDate dateByAddingTimeInterval:-1800];
+                break;
+            case 3:
+                fireDate = [fireDate dateByAddingTimeInterval:-3600];
+                break;
+            case 4:
+                fireDate = [fireDate dateByAddingTimeInterval:-86400];
+                break;
+        }
+        
+        notification.fireDate = conference.startTime;
+        notification.timeZone = [NSTimeZone defaultTimeZone];
+        notification.alertBody = [NSString stringWithFormat:@"conference call reminder : %@",conference.name];
+        notification.alertAction = @"AccuDial Reminder";
+        notification.soundName = UILocalNotificationDefaultSoundName;
+
+        switch (conference.repeat.intValue) {
+            case 1:
+                notification.repeatInterval = NSDayCalendarUnit;
+                break;
+            case 2:
+                notification.repeatInterval = NSWeekCalendarUnit;
+                break;
+            case 3:
+                notification.repeatInterval = NSWeekCalendarUnit;
+                break;
+            case 4:
+                notification.repeatInterval = NSMonthCalendarUnit;
+                break;
+        }
+        NSLog(@"Schedule conference for : %@", fireDate);
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    }
+}
+
 +(BOOL)addConferenceToCalendar:(Conference *)conference{
 #warning finish fleshing out addToCalendar
 //    EKEventStore *eventStore = [[EKEventStore alloc] init];
@@ -318,6 +367,11 @@ static NSString *modelName = @"Conference";
         }
     }
     return NO;
+}
+
++(void)save:(ManagedModel *)managedModel{
+    [super save:managedModel];
+    [self scheduleConferenceNotifications];
 }
 
 

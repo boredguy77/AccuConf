@@ -49,7 +49,7 @@
 
 -(void)showDatePicker:(BOOL)animated{
     self.isDatePickerShowing = YES;
-    CGRect newFrame = CGRectMake(0, 0, self.datePickerView.frame.size.width, self.view.frame.size.height);
+    CGRect newFrame = CGRectMake(0, 0, self.datePickerView.frame.size.width, self.scrollview.contentSize.height);
     if(animated) {
         [UIView animateWithDuration:.5 animations:^{
             self.datePickerView.frame = newFrame;
@@ -73,7 +73,7 @@
 
 -(void)showPicker:(BOOL)animated{
     self.isPickerShowing = YES;
-    CGRect newFrame = CGRectMake(0, 0, self.pickerView.frame.size.width, self.view.frame.size.height);
+    CGRect newFrame = CGRectMake(0, 0, self.pickerView.frame.size.width, self.scrollview.contentSize.height);
     if(animated) {
         [UIView animateWithDuration:.5 animations:^{
             self.pickerView.frame = newFrame;
@@ -190,6 +190,10 @@
     conf.addToCal = [NSNumber numberWithBool:self.addToCalSwitch.on];
 }
 
+-(void)resignFirstResponder{
+    [self.view endEditing:YES];
+}
+
 #pragma mark - IBAction
 -(void)nextButtonPressed{
     if(!self.isDatePickerShowing && !self.isPickerShowing){
@@ -229,9 +233,9 @@
     
     selectedTextField = textField;
     
-    if (selectedTextField == self.startTimeField) {
+    if (selectedTextField == self.startTimeField && self.conference) {
         self.datePicker.date = self.conference.startTime;
-    } else {
+    } else if(self.conference){
         self.datePicker.date = self.conference.endTime;
     }
     

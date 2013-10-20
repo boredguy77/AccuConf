@@ -79,7 +79,7 @@
         } else {
 #warning write validation handling
             NSLog(@"conferenceLine didn't pass validation");
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            [[[UIAlertView alloc] initWithTitle:@"Invalid" message:@"The ConferenceLine is Invalid, Please Make sure a phone number and name are entered and then re-save" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil] show];
         }
         
     } else {

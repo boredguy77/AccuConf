@@ -60,6 +60,14 @@
     }
 }
 
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:notification.alertAction
+                                                    message:notification.alertBody
+                                                   delegate:self cancelButtonTitle:@"Ok"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
 #pragma mark - Core Data stack
 
 // Returns the managed object context for the application.
