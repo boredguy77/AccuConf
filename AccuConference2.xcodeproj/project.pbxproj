@@ -19,6 +19,8 @@
 		090A7A4E1809A32F00B0A273 /* blueRadio.png in Resources */ = {isa = PBXBuildFile; fileRef = 090A7A4D1809A32F00B0A273 /* blueRadio.png */; };
 		09395E7D17F26DC7000B0D4B /* ManagedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 09395E7C17F26DC7000B0D4B /* ManagedModel.m */; };
 		09BB82811812F69C00E7B35A /* ContactArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BB82801812F69C00E7B35A /* ContactArray.m */; };
+		09BB82841813342900E7B35A /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 09BB82831813342900E7B35A /* check.png */; };
+		09BB82871813773400E7B35A /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BB82861813773400E7B35A /* DatePickerViewController.m */; };
 		09D7482B17E807D400DC4FD1 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D7482A17E807D400DC4FD1 /* Group.m */; };
 		09D7482E17E810E400DC4FD1 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D7482C17E810E300DC4FD1 /* AddressBook.framework */; };
 		09D7482F17E810E400DC4FD1 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D7482D17E810E300DC4FD1 /* AddressBookUI.framework */; };
@@ -94,6 +96,9 @@
 		09395E7C17F26DC7000B0D4B /* ManagedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagedModel.m; sourceTree = "<group>"; };
 		09BB827F1812F69C00E7B35A /* ContactArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactArray.h; sourceTree = "<group>"; };
 		09BB82801812F69C00E7B35A /* ContactArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactArray.m; sourceTree = "<group>"; };
+		09BB82831813342900E7B35A /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
+		09BB82851813773400E7B35A /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
+		09BB82861813773400E7B35A /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController.m; sourceTree = "<group>"; };
 		09D7482917E807D400DC4FD1 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
 		09D7482A17E807D400DC4FD1 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		09D7482C17E810E300DC4FD1 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -312,6 +317,7 @@
 		09FEA51F17C9A2F000958A17 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				09BB82831813342900E7B35A /* check.png */,
 				090A7A4D1809A32F00B0A273 /* blueRadio.png */,
 				090A7A4217FD2C6800B0A273 /* AccuConferenceLogoWhite.png */,
 				090A7A4317FD2C6800B0A273 /* AccuConferenceLogoWhite_small.png */,
@@ -380,6 +386,8 @@
 				09FEA5A517CE9EE700958A17 /* RootTabController.m */,
 				090A7A3F17FD265F00B0A273 /* ParentViewController.h */,
 				090A7A4017FD265F00B0A273 /* ParentViewController.m */,
+				09BB82851813773400E7B35A /* DatePickerViewController.h */,
+				09BB82861813773400E7B35A /* DatePickerViewController.m */,
 			);
 			name = shared;
 			sourceTree = "<group>";
@@ -492,6 +500,7 @@
 				09FEA50717C9A29300958A17 /* Default@2x.png in Resources */,
 				09FEA50917C9A29300958A17 /* Default-568h@2x.png in Resources */,
 				09FEA50C17C9A29300958A17 /* MainStoryboard.storyboard in Resources */,
+				09BB82841813342900E7B35A /* check.png in Resources */,
 				09FEA52917C9A34C00958A17 /* calendar.png in Resources */,
 				09FEA52A17C9A34C00958A17 /* call.png in Resources */,
 				09FEA52B17C9A34C00958A17 /* contacts.png in Resources */,
@@ -555,6 +564,7 @@
 				09FEA5A617CE9EE700958A17 /* RootTabController.m in Sources */,
 				09D7482B17E807D400DC4FD1 /* Group.m in Sources */,
 				090A7A4C17FD2E9000B0A273 /* InfoViewController.m in Sources */,
+				09BB82871813773400E7B35A /* DatePickerViewController.m in Sources */,
 				09395E7D17F26DC7000B0D4B /* ManagedModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

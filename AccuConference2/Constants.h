@@ -1,7 +1,7 @@
 #ifndef AccuConference2_Constants_h
 #define AccuConference2_Constants_h
 
-#pragma mark List Conference 
+#pragma mark List Conference
 
 #define CONFERENCE_LINE_CELL_ID @"CONFERENCE_LINE_CELL_ID"
 
@@ -42,9 +42,6 @@
 #define GROUP_UPDATED @"GROUP_UPDATED"
 #define GROUP_DELETED @"GROUP_DELETED"
 #define READ_GROUPS @"READ_GROUPS"
-
-
-
 
 #define CONFERENCE_TABLE_CELL_ID @"CONFERENCE_TABLE_CELL_ID"
 #define CONFERENCE_WAREHOUSE_INIT @"CONFERENCE_WAREHOUSE_INIT"

@@ -55,54 +55,6 @@
     }
 }
 
--(void)deleteContactPressed:(id)sender{
-    
-}
-
--(void)addModeratorPressed{
-    [self performSegueWithIdentifier:@"toSelectContacts" sender:self];
-}
-
--(void)addParticipantPressed{
-    [self performSegueWithIdentifier:@"toSelectContacts" sender:self];
-}
-
--(void)addYourselfModeratorPressed{
-    NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:0];
-    UITableViewCell *cell = [self.table cellForRowAtIndexPath:path];
-    UITextField *checkBox = (UITextField *) [cell viewWithTag:1];
-    if ([checkBox.text isEqualToString:@"X"]) {
-        checkBox.text = @"";
-    } else {
-        checkBox.text = @"X";
-    }
-}
-
--(void)addYourselfParticipantPressed{
-    NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:1];
-    UITableViewCell *cell = [self.table cellForRowAtIndexPath:path];
-    UITextField *checkBox = (UITextField *) [cell viewWithTag:1];
-    if ([checkBox.text isEqualToString:@"X"]) {
-        checkBox.text = @"";
-    } else {
-        checkBox.text = @"X";
-    }
-}
-
--(void)deleteModerator:(id)sender{
-    
-}
-
--(void)deleteParticipant:(id)sender{
-    
-}
-
--(void)doneButtonPressed{
-    
-    [Conference save:self.conference];
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
 #pragma mark - Tableview Datasource
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -154,6 +106,55 @@
             return 44;
             break;
     }
+}
+
+#pragma mark - IBActions
+-(void)deleteContactPressed:(id)sender{
+    
+}
+
+-(void)addModeratorPressed{
+    [self performSegueWithIdentifier:@"toSelectContacts" sender:self];
+}
+
+-(void)addParticipantPressed{
+    [self performSegueWithIdentifier:@"toSelectContacts" sender:self];
+}
+
+-(void)addYourselfModeratorPressed{
+    NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:0];
+    UITableViewCell *cell = [self.table cellForRowAtIndexPath:path];
+    UITextField *checkBox = (UITextField *) [cell viewWithTag:1];
+    if ([checkBox.text isEqualToString:@"X"]) {
+        checkBox.text = @"";
+    } else {
+        checkBox.text = @"X";
+    }
+}
+
+-(void)addYourselfParticipantPressed{
+    NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:1];
+    UITableViewCell *cell = [self.table cellForRowAtIndexPath:path];
+    UITextField *checkBox = (UITextField *) [cell viewWithTag:1];
+    if ([checkBox.text isEqualToString:@"X"]) {
+        checkBox.text = @"";
+    } else {
+        checkBox.text = @"X";
+    }
+}
+
+-(void)deleteModerator:(id)sender{
+    
+}
+
+-(void)deleteParticipant:(id)sender{
+    
+}
+
+-(void)doneButtonPressed{
+    
+    [Conference save:self.conference];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

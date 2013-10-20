@@ -5,8 +5,15 @@
 #import "Group.h"
 #import "Constants.h"
 @protocol ListContactSelectionProtocol;
+typedef enum{
+    ALL = 1 << 0,
+    ACCUDIAL = 1 << 1,
+    GROUPS = 2 << 2
+} LIST_CONTACTS_TYPES;
 
-@interface ListContactsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
+@interface ListContactsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>{
+    int allContactsIndex, accudialContactsIndex, groupsIndex;
+}
 
 @property(nonatomic, strong) id<ListContactSelectionProtocol> delegate;
 @property(nonatomic, strong) IBOutlet UITableView *table;
@@ -15,6 +22,7 @@
 @property(nonatomic, strong) NSArray *accudialContacts;
 @property(nonatomic, strong) NSArray *groups;
 @property(nonatomic, strong) NSArray *selectedContacts;
+@property(nonatomic) LIST_CONTACTS_TYPES types;
 
 -(IBAction)segmentedButtonPress;
 -(IBAction)donePressed;

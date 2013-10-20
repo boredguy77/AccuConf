@@ -59,12 +59,24 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)deleteContact:(id)sender{
+    NSLog(@"deleteContact");
+    UIButton *btn = (UIButton *)sender;
+    UITableViewCell *cell = (UITableViewCell *) btn.superview.superview.superview;
+    NSIndexPath *indexPath = [self.table indexPathForCell:cell];
+    Contact *contact = (Contact *) [self.contacts objectAtIndex:indexPath.row];
+    NSMutableArray *tmpArray = [NSMutableArray arrayWithArray:self.contacts];
+    [tmpArray removeObject:contact];
+    self.contacts = tmpArray;
+    [self.table reloadData];
+}
+
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.destinationViewController isKindOfClass:[ListContactsViewController class]]){
         ListContactsViewController *listContactsViewController = (ListContactsViewController *)segue.destinationViewController;
         listContactsViewController.delegate = self;
-//        listContactsViewController.sel
+        listContactsViewController.types = ALL | ACCUDIAL;
     }
 }
 
@@ -73,7 +85,7 @@
     NSLog(@"listContactsDidFinishSelecting");
     NSArray *selectedContacts = (NSArray *) [dict objectForKey:@"selectedContacts"];
     
-    self.contacts = selectedContacts;
+    self.contacts = [self.contacts arrayByAddingObjectsFromArray:selectedContacts];
     [self.table reloadData];
 }
 
@@ -84,10 +96,11 @@
 
 #pragma mark - UITableDatasource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = (UITableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"id"];
-    if(!cell){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"id"];
-    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListContactsCell"];
+    UIButton *btn = (UIButton *) [cell viewWithTag:2];
+    
+    [btn addTarget:self action:@selector(deleteContact:) forControlEvents:UIControlEventTouchUpInside];
+    
     Contact *contact = (Contact *) [self.contacts objectAtIndex:indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",contact.fName, contact.lName];
     return cell;

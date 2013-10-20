@@ -2,7 +2,9 @@
 #import "Conference.h"
 #import "ConferenceLine.h"
 #import "AddEditConferenceViewController.h"
-@interface ConferenceDetailViewController : UITableViewController
+@interface ConferenceDetailViewController : UITableViewController {
+    Conference *listenerConference;
+}
 
 @property(nonatomic, strong)Conference *conference;
 
@@ -19,8 +21,10 @@
 
 @property(nonatomic, strong) IBOutlet UITableView *table;
 @property(nonatomic, strong) IBOutlet UIWebView *contactWebView;
+@property(nonatomic) BOOL isConferenceDeleted;
 
 -(IBAction)editButtonPressed;
+-(void)conferenceDeleted:(NSNotification *) notification;
 
 
 @end

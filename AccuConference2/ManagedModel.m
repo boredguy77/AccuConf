@@ -99,7 +99,8 @@ static NSString *modelName = @"ManagedModel";
     [[self class] save:nil];
     NSDictionary *retDict = [NSDictionary dictionaryWithObjectsAndKeys:managedModel, [[self class] modelName], nil];
     NSString *notificationName = [NSString stringWithFormat:@"%@_DELETED",[[[self class] modelName] uppercaseString]];
-    [defaultCenter postNotificationName:notificationName object:self userInfo:retDict];
+    NSLog(@"%@",notificationName);
+    [defaultCenter postNotificationName:notificationName object:managedModel userInfo:retDict];
     [[self class]dispatchAll];
     return managedModel;
 }

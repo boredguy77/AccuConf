@@ -3,7 +3,6 @@
 #import "Contact.h"
 #import "Constants.h"
 
-
 @interface ListConferenceContactsViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, strong)Conference *conference;

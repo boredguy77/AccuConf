@@ -15,7 +15,7 @@
     return self;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -23,7 +23,7 @@
     return self;
 }
 
-- (void)viewDidLoad{
+-(void)viewDidLoad{
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(conferencesModified:) name:CONFERENCES_MODIFIED object:nil];
     self.conferences = [Conference all];
@@ -43,10 +43,12 @@
 
 -(void)showConferencesTable{
     self.table.hidden = NO;
+    self.segmentedControl.hidden = NO;
 }
 
 -(void)hideConferencesTable{
     self.table.hidden = YES;
+    self.segmentedControl.hidden = YES;
 }
 
 -(void)showNoConferencesNotification{
@@ -72,7 +74,18 @@
 }
 
 -(void)segmentedControlToggle:(id)sender{
-    
+    switch (self.segmentedControl.selectedSegmentIndex) {
+        case 0:
+            self.conferences = [Conference conferencesToday];
+            break;
+        case 1:
+            self.conferences = [Conference all];
+            break;
+        case 2:
+            self.conferences = [Conference conferencesThisMonth];
+            break;
+    }
+    [self.table reloadData];
 }
 
 #pragma mark - TableView Delegate
@@ -89,16 +102,29 @@
     Conference *conference = [self.conferences objectAtIndex:[indexPath row]];
     SingleImageLeftTitleAndSubTitleCell *cell = (SingleImageLeftTitleAndSubTitleCell *) [tableView dequeueReusableCellWithIdentifier:CONFERENCE_TABLE_CELL_ID];
     cell.titleLabel.text = conference.name;
-    cell.subtitleLabel.text = conference.startTime.description;
-
-#warning re-enable logic later
-//    if(!conference.startTime || conference.startTime < [NSDate date]){
-//        cell.image.image = self.cellImage;
-//    } else {
+    cell.subtitleLabel.text = [Conference stringFromDate:conference.startTime];
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *startComponents = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSMinuteCalendarUnit fromDate:conference.startTime];
+    
+    NSString *startDay = [NSString stringWithFormat:@"%i",startComponents.day];
+    
+    startComponents.hour = 23;
+    startComponents.minute = 59;
+    
+    NSDate *endOfDay = [startComponents date];
+    
+    if(conference.startTime > [NSDate date] && conference.startTime < endOfDay){
+        cell.image.image = self.cellImage;
+    } else {
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"MMM"];
+        NSString *monthName = [df stringFromDate:conference.startTime];
+        
         cell.image.image = nil;
-        cell.imageLabelTop.text = @"May";
-        cell.imageLabelBottom.text = @"1";
-//    }
+        cell.imageLabelTop.text = monthName;
+        cell.imageLabelBottom.text = startDay;
+    }
     return cell;
 }
 

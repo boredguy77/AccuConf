@@ -6,14 +6,60 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupsChanged:) name:GROUPS_MODIFIED object:nil];
+    allContactsIndex = 0;
+    accudialContactsIndex = 1;
+    groupsIndex = 2;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    [self initSegments];
+    
     if (ABAddressBookGetAuthorizationStatus() ==
         kABAuthorizationStatusAuthorized) {
         [self initContactData];
     }
+}
+
+-(void) initSegments{
+    int index = 0;
+    
+    allContactsIndex = -1;
+    accudialContactsIndex = -1;
+    groupsIndex = -1;
+    [self.segmentedControl removeAllSegments];
+    
+    if(self.types & ALL ){
+        allContactsIndex = index;
+        [self.segmentedControl insertSegmentWithTitle:@"Contacts" atIndex:index animated:NO];
+        index ++;
+    }
+    
+    if (self.types & ACCUDIAL) {
+        accudialContactsIndex = index;
+        [self.segmentedControl insertSegmentWithTitle:@"Accudial" atIndex:index animated:NO];
+        index++;
+    }
+    
+    if (self.types & GROUPS) {
+        groupsIndex = index;
+        [self.segmentedControl insertSegmentWithTitle:@"Groups" atIndex:index animated:NO];
+        index++;
+    }
+    
+    if (index == 0) {
+        [self.segmentedControl insertSegmentWithTitle:@"Contacts" atIndex:0 animated:NO];
+        [self.segmentedControl insertSegmentWithTitle:@"Accudial" atIndex:1 animated:NO];
+        [self.segmentedControl insertSegmentWithTitle:@"Groups" atIndex:2 animated:NO];
+        allContactsIndex = 0;
+        accudialContactsIndex = 1;
+        groupsIndex = 2;
+    }
+    
+    self.segmentedControl.selectedSegmentIndex = 0;
+    
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -343,37 +389,42 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     UIImageView *image = (UIImageView *)[cell viewWithTag:2];
-    Contact *contact;
     
-    if(self.segmentedControl.selectedSegmentIndex == 0) {
-        contact =  (Contact *)[(NSArray *) [self.accudialContacts objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    } else if(self.segmentedControl.selectedSegmentIndex == 1) {
-        contact =  (Contact *)[(NSArray *) [self.contacts objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    } else {
-        Group *group = (Group *) [self.groups objectAtIndex:indexPath.row];
+    NSArray *array = [self arrayForSegmentedControlState];
+    NSArray *letterArray = [array objectAtIndex: indexPath.section];
+    
+    if(self.segmentedControl.selectedSegmentIndex == groupsIndex){
+        Group *group = (Group *) [letterArray objectAtIndex:indexPath.row];
         group.selected = !group.selected;
         image.hidden = !group.selected;
-    }
-    
-    if(self.segmentedControl.selectedSegmentIndex != 2) {
+        
+    } else {
+        Contact * contact = [letterArray objectAtIndex:indexPath.row];
         contact.selected = !contact.selected;
         image.hidden = !contact.selected;
     }
 }
 
 #pragma mark - TableView Datasource
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    NSLog(@"numberOfSectionsInTableView");
+-(NSArray *) arrayForSegmentedControlState{
     NSArray *array;
     
-    if(self.segmentedControl.selectedSegmentIndex == 0) {
+    if(self.segmentedControl.selectedSegmentIndex == accudialContactsIndex) {
         array = self.accudialContacts;
-    } else if(segmentedControl.selectedSegmentIndex == 1){
+    } else if(segmentedControl.selectedSegmentIndex == allContactsIndex){
         array = self.contacts;
-    } else {
+    } else if(segmentedControl.selectedSegmentIndex == groupsIndex){
         array = self.groups;
+    } else {
+        NSLog(@"No array for contacts");
     }
     
+    return array;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    NSLog(@"numberOfSectionsInTableView");
+    NSArray *array = [self arrayForSegmentedControlState];
     return array.count;
 }
 
@@ -396,23 +447,16 @@
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     
-    NSArray *array;
-    
-    if(self.segmentedControl.selectedSegmentIndex == 0) {
-        array =  (NSArray *) [self.accudialContacts objectAtIndex:section];
-    } else if(segmentedControl.selectedSegmentIndex == 1){
-        array =  (NSArray *) [self.contacts objectAtIndex:section];
-    } else {
-        array = (NSArray *) [self.groups objectAtIndex:section];
-    }
+    NSArray *array = [self arrayForSegmentedControlState];
+    NSArray *letterArray = [array objectAtIndex:section];
     
     NSString * header = Nil;
         
-    if (self.segmentedControl.selectedSegmentIndex == 2) {
-        Group *group = (Group *) [array firstObject];
+    if (self.segmentedControl.selectedSegmentIndex == groupsIndex) {
+        Group *group = (Group *) [letterArray firstObject];
         header = [NSString stringWithFormat:@"%c",[group.name characterAtIndex:0]];
     } else {
-        Contact *contact = (Contact *)[array firstObject];
+        Contact *contact = (Contact *)[letterArray firstObject];
         header = [NSString stringWithFormat:@"%c",[contact.lName characterAtIndex:0]];
     }
     
@@ -424,22 +468,15 @@
     UILabel *title = (UILabel *) [cell viewWithTag:1];
     UIImageView *check = (UIImageView *)[cell viewWithTag:2];
     
-    NSArray *array;
-    
-    if(self.segmentedControl.selectedSegmentIndex == 0) {
-        array =  (NSArray *) [self.accudialContacts objectAtIndex:indexPath.section];
-    } else if(segmentedControl.selectedSegmentIndex == 1){
-        array =  (NSArray *) [self.contacts objectAtIndex:indexPath.section];
-    } else {
-        array = (NSArray *) [self.groups objectAtIndex:indexPath.section];
-    }
+    NSArray *array = [self arrayForSegmentedControlState];
+    NSArray *letterArray = [array objectAtIndex:indexPath.section];
 
-    if(self.segmentedControl.selectedSegmentIndex!=2){
-        Contact *contact = (Contact *) [array objectAtIndex:indexPath.row];
+    if(self.segmentedControl.selectedSegmentIndex!=groupsIndex){
+        Contact *contact = (Contact *) [letterArray objectAtIndex:indexPath.row];
         title.text = [NSString stringWithFormat:@"%@ %@",contact.fName, contact.lName];
         check.hidden = !contact.selected;
     } else {
-        Group *group = (Group*) [array objectAtIndex:indexPath.row];
+        Group *group = (Group*)[letterArray objectAtIndex:indexPath.row];
         title.text = group.name;
         check.hidden = !group.selected;
     }
@@ -449,40 +486,19 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    switch (self.segmentedControl.selectedSegmentIndex) {
-        case 0:
-            return [(NSArray *) [self.accudialContacts objectAtIndex:section] count];
-            break;
-        case 1:
-            return [(NSArray *) [self.contacts objectAtIndex:section] count];
-            break;
-        case 2:
-            return [(NSArray *) [self.groups objectAtIndex:section] count];;
-            break;
-            
-        default:
-            NSLog(@"Default selected segment %i", self.segmentedControl.selectedSegmentIndex );
-            return 0;
-            break;
-    }
+    NSArray *array = [self arrayForSegmentedControlState];
+    NSArray *letterArray =  (NSArray *) [array objectAtIndex:section];
+    return letterArray.count;
 }
 
 -(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView{
-    NSArray *array;
+    NSArray *array = [self arrayForSegmentedControlState];
     NSMutableArray *titles = [[NSMutableArray alloc] init];
-    
-    if(self.segmentedControl.selectedSegmentIndex == 0) {
-        array = self.accudialContacts;
-    } else if(segmentedControl.selectedSegmentIndex == 1){
-        array = self.contacts;
-    } else {
-        array = self.groups;
-    }
     
     for (NSArray *letterArray in array) {
         NSString *letter;
         
-        if (self.segmentedControl.selectedSegmentIndex == 2) {
+        if (self.segmentedControl.selectedSegmentIndex == groupsIndex) {
             Group *group = (Group *) [letterArray firstObject];
             letter = [NSString stringWithFormat:@"%c",[group.name characterAtIndex:0]];
         } else {
@@ -493,6 +509,10 @@
     }
     
     return titles;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 44.0f;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{

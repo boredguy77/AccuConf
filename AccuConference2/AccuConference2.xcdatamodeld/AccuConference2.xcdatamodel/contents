@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12F37" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F45" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Conference" representedClassName="Conference" syncable="YES">
         <attribute name="addToCal" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="addToCalID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="endTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notify" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="notifyID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="repeat" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="conferenceLine" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ConferenceLine" inverseName="conferences" inverseEntity="ConferenceLine" syncable="YES"/>
@@ -36,9 +38,9 @@
         <relationship name="contacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contact" inverseName="groups" inverseEntity="Contact" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Conference" positionX="160" positionY="192" width="128" height="195"/>
-        <element name="ConferenceLine" positionX="160" positionY="192" width="128" height="135"/>
-        <element name="Contact" positionX="160" positionY="192" width="128" height="180"/>
-        <element name="Group" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="Conference" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ConferenceLine" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Contact" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Group" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

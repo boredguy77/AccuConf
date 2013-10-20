@@ -2,26 +2,33 @@
 
 @implementation ConferenceDetailViewController
 
-@synthesize conference, notifyLabel, notesLabel, addToCalendarLabel, conferenceLineParticipantCodeLabel, conferenceLineModeratorCodeLabel, conferenceLineNumberLabel, conferenceLineNameLabel, contactWebView, nameLabel;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize conference, notifyLabel, notesLabel, addToCalendarLabel, conferenceLineParticipantCodeLabel, conferenceLineModeratorCodeLabel, conferenceLineNumberLabel, conferenceLineNameLabel, contactWebView, nameLabel, isConferenceDeleted;
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     self.tableView .allowsSelection = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if(self.conference){
+    if(listenerConference){
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CONFERENCE_DELETED object:listenerConference];
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(conferenceDeleted:) name:CONFERENCE_DELETED object:self.conference];
+    listenerConference = self.conference;
+    
+    if (!self.isConferenceDeleted && self.conference){
         [self populateUIWithConference:self.conference];
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (self.isConferenceDeleted) {
+        NSLog(@"conf deleted");
+        self.isConferenceDeleted = NO;
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -32,11 +39,14 @@
 
 -(void)populateUIWithConference:(Conference *)conf{
     self.nameLabel.text = conf.name;
-    self.timeLabel.text = [NSString stringWithFormat:@"%@ %@: %@-%@",@"May",@"1", @"1:30pm",@"2:30pm"];
+    self.timeLabel.text = [Conference stringFromInterval:conf.startTime to:conf.endTime];
+    self.notesLabel.text = conf.notes;
     self.conferenceLineNameLabel.text = conf.conferenceLine.name;
-    self.conferenceLineNumberLabel.text = conf.conferenceLine.number;
+    self.conferenceLineNumberLabel.text = [ConferenceLine formatStringAsPhoneNumber:conf.conferenceLine.number];
     self.conferenceLineModeratorCodeLabel.text = conf.conferenceLine.moderatorCode;
     self.conferenceLineParticipantCodeLabel.text = conf.conferenceLine.participantCode;
+    self.repeatLabel.text = [Conference stringForRepeatType:conf.repeat.intValue];
+    self.notifyLabel.text = [Conference stringForNotify:conf.notify.intValue];
     self.addToCalendarLabel.text = conf.addToCal.boolValue?@"YES":@"NO";
     
     NSString *contactHTML = @"<b>Me:</b> Moderator";
@@ -46,6 +56,11 @@
 #pragma mark - Events
 -(void)editButtonPressed{
     [self performSegueWithIdentifier:@"toAddEditConference" sender:self.conference];
+}
+
+-(void)conferenceDeleted:(NSNotification *)notification{
+    NSLog(@"notification received");
+    self.isConferenceDeleted = YES;
 }
 
 #pragma mark - Segue
