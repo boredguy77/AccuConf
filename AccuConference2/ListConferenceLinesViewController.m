@@ -67,7 +67,6 @@
     } else if(self.mode == LIST_SELECT_SINGLE_MODE){
         if(self.delegate && [self.delegate respondsToSelector:@selector(didSelectConferenceLine:)]){
             [self.delegate didSelectConferenceLine:line];
-#warning need to figure out where/when to change List Mode to default
 //            self.mode = LIST_DETAIL_MODE;
 //            self.delegate = nil;
 //            [self.navigationController popViewControllerAnimated:YES];

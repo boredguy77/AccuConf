@@ -105,7 +105,7 @@
 		09D7482A17E807D400DC4FD1 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		09D7482C17E810E300DC4FD1 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		09D7482D17E810E300DC4FD1 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
-		09FEA4ED17C9A29300958A17 /* AccuConference2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccuConference2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		09FEA4ED17C9A29300958A17 /* AccuDial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccuDial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09FEA4F017C9A29300958A17 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		09FEA4F217C9A29300958A17 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		09FEA4F417C9A29300958A17 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -210,7 +210,7 @@
 		09FEA4EE17C9A29300958A17 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				09FEA4ED17C9A29300958A17 /* AccuConference2.app */,
+				09FEA4ED17C9A29300958A17 /* AccuDial.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -451,9 +451,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		09FEA4EC17C9A29300958A17 /* AccuConference2 */ = {
+		09FEA4EC17C9A29300958A17 /* AccuDial */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 09FEA51817C9A29300958A17 /* Build configuration list for PBXNativeTarget "AccuConference2" */;
+			buildConfigurationList = 09FEA51817C9A29300958A17 /* Build configuration list for PBXNativeTarget "AccuDial" */;
 			buildPhases = (
 				09FEA4E917C9A29300958A17 /* Sources */,
 				09FEA4EA17C9A29300958A17 /* Frameworks */,
@@ -463,9 +463,9 @@
 			);
 			dependencies = (
 			);
-			name = AccuConference2;
+			name = AccuDial;
 			productName = AccuConference2;
-			productReference = 09FEA4ED17C9A29300958A17 /* AccuConference2.app */;
+			productReference = 09FEA4ED17C9A29300958A17 /* AccuDial.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -489,7 +489,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				09FEA4EC17C9A29300958A17 /* AccuConference2 */,
+				09FEA4EC17C9A29300958A17 /* AccuDial */,
 			);
 		};
 /* End PBXProject section */
@@ -657,6 +657,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AccuConference2/AccuConference2-Prefix.pch";
 				INFOPLIST_FILE = "AccuConference2/AccuConference2-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/alextelford/Development/AccuConference2/AccuConference2,
@@ -672,6 +673,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AccuConference2/AccuConference2-Prefix.pch";
 				INFOPLIST_FILE = "AccuConference2/AccuConference2-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/alextelford/Development/AccuConference2/AccuConference2,
@@ -693,7 +695,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		09FEA51817C9A29300958A17 /* Build configuration list for PBXNativeTarget "AccuConference2" */ = {
+		09FEA51817C9A29300958A17 /* Build configuration list for PBXNativeTarget "AccuDial" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				09FEA51917C9A29300958A17 /* Debug */,

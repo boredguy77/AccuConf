@@ -116,7 +116,6 @@ static NSString *modelName = @"Conference";
 	[formatter setDateFormat:@"hh:mma"];
 	NSString *dateString = [formatter stringFromDate:self.startTime];
     
-    NSTimeZone *time = [NSTimeZone localTimeZone];
 //    NSString *abbr = [time abbreviation];
     
     if (dateString==nil) {

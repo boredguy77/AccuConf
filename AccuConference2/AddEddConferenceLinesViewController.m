@@ -51,7 +51,6 @@
 }
 
 -(BOOL)isConferenceValuesValid{
-#warning implement
     return YES;
 }
 
@@ -77,7 +76,6 @@
             self.conferenceLine = nil;
             [self.navigationController popViewControllerAnimated:YES];
         } else {
-#warning write validation handling
             NSLog(@"conferenceLine didn't pass validation");
             [[[UIAlertView alloc] initWithTitle:@"Invalid" message:@"The ConferenceLine is Invalid, Please Make sure a phone number and name are entered and then re-save" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil] show];
         }
