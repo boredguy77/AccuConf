@@ -16,6 +16,8 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     NSLog(@"ViewDidLoad");
+    
+    [Conference updateAllConferenceDates];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(conferenceLinesModified:) name:CONFERENCE_LINES_MODIFIED object:nil];
     self.conferenceLines = [ConferenceLine all];
     if(self.conferenceLines.count>0) {

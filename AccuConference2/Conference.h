@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <EventKit/EventKit.h>
 #import "ManagedModel.h"
 #import "Contact.h"
 
@@ -50,8 +51,11 @@ enum {
 +(NSString *) stringForRepeatType:(int)interval;
 
 +(NSString *) stringForParticipantsInConference:(Conference *)conference;
++(void)addConferencesToCalendar:(EKEventStore *) eventStore;
 
 +(void) scheduleConferenceNotifications;
++(void) updateAllConferenceDates;
+
 
 -(NSString *) dateString;
 -(NSString *) monthDayYearString;

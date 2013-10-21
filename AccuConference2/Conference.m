@@ -256,95 +256,50 @@ static NSString *modelName = @"Conference";
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     for (Conference *conference in all) {
-        UILocalNotification *notification = [[UILocalNotification alloc]init];
-        
-        NSDate *fireDate = conference.startTime;
-        
-        switch (conference.notify.intValue) {
-            case 1:
-                fireDate = [fireDate dateByAddingTimeInterval:-900];
-                break;
-            case 2:
-                fireDate = [fireDate dateByAddingTimeInterval:-1800];
-                break;
-            case 3:
-                fireDate = [fireDate dateByAddingTimeInterval:-3600];
-                break;
-            case 4:
-                fireDate = [fireDate dateByAddingTimeInterval:-86400];
-                break;
-        }
-        
-        notification.fireDate = conference.startTime;
-        notification.timeZone = [NSTimeZone defaultTimeZone];
-        notification.alertBody = [NSString stringWithFormat:@"conference call reminder : %@",conference.name];
-        notification.alertAction = @"AccuDial Reminder";
-        notification.soundName = UILocalNotificationDefaultSoundName;
+        if (conference.notify.intValue != 0) {
+            UILocalNotification *notification = [[UILocalNotification alloc]init];
+            
+            NSDate *fireDate = conference.startTime;
+            
+            switch (conference.notify.intValue) {
+                case 1:
+                    fireDate = [fireDate dateByAddingTimeInterval:-900];
+                    break;
+                case 2:
+                    fireDate = [fireDate dateByAddingTimeInterval:-1800];
+                    break;
+                case 3:
+                    fireDate = [fireDate dateByAddingTimeInterval:-3600];
+                    break;
+                case 4:
+                    fireDate = [fireDate dateByAddingTimeInterval:-86400];
+                    break;
+            }
+            
+            notification.fireDate = conference.startTime;
+            notification.timeZone = [NSTimeZone defaultTimeZone];
+            notification.alertBody = [NSString stringWithFormat:@"conference call reminder : %@",conference.name];
+            notification.alertAction = @"AccuDial Reminder";
+            notification.soundName = UILocalNotificationDefaultSoundName;
 
-        switch (conference.repeat.intValue) {
-            case 1:
-                notification.repeatInterval = NSDayCalendarUnit;
-                break;
-            case 2:
-                notification.repeatInterval = NSWeekCalendarUnit;
-                break;
-            case 3:
-                notification.repeatInterval = NSWeekCalendarUnit;
-                break;
-            case 4:
-                notification.repeatInterval = NSMonthCalendarUnit;
-                break;
+            switch (conference.repeat.intValue) {
+                case 1:
+                    notification.repeatInterval = NSDayCalendarUnit;
+                    break;
+                case 2:
+                    notification.repeatInterval = NSWeekCalendarUnit;
+                    break;
+                case 3:
+                    notification.repeatInterval = NSWeekCalendarUnit;
+                    break;
+                case 4:
+                    notification.repeatInterval = NSMonthCalendarUnit;
+                    break;
+            }
+            NSLog(@"Schedule conference for : %@", fireDate);
+            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
         }
-        NSLog(@"Schedule conference for : %@", fireDate);
-        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     }
-}
-
-+(BOOL)addConferenceToCalendar:(Conference *)conference{
-#warning finish fleshing out addToCalendar
-//    EKEventStore *eventStore = [[EKEventStore alloc] init];
-//    NSError *err;
-    
-//    EKEvent *conferenceEvent = [eventStore eventWithIdentifier:conference.addToCalID];
-    
-//    if(conferenceEvent!=nil){
-//        if(conference.startTime){
-//            conferenceEvent.startDate = conference.startTime;
-//            conferenceEvent.endDate = conference.endTime;
-////            conferenceEvent.recurrenceRules =
-//            [eventStore saveEvent:conferenceEvent span:EKSpanThisEvent error:&err];
-//            return YES;
-//        }
-//        else {
-//            [eventStore removeEvent:conferenceEvent span:EKSpanThisEvent error:&err ];
-//            return YES;
-//        }
-//    }
-//    else{
-//        if(self.unSavedConferenceCall.conferenceDate!=nil){
-//            EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
-//            event.title = [NSString stringWithFormat:@"%@ conference call", self.unSavedConferenceCall.name];
-//            event.notes = [NSString stringWithFormat:@"Conference Name : %@ Date : %@",self.unSavedConferenceCall.name, [self.unSavedConferenceCall getDateString]];
-//            event.startDate = self.unSavedConferenceCall.conferenceDate;
-//            event.endDate = self.unSavedConferenceCall.conferenceEndDate;
-//            
-//            EKAlarm *alarm = [EKAlarm alarmWithRelativeOffset:-900];
-//            [event addAlarm:alarm];
-//            
-//            [event setCalendar:[eventStore defaultCalendarForNewEvents]];
-//            
-//            [eventStore saveEvent:event span:EKSpanThisEvent error:&err];
-//            [eventStore release];
-//            if (err) {
-//                NSLog(@"Error");
-//                return NO;
-//            }
-//            self.unSavedConferenceCall.calendarEventID = event.eventIdentifier;
-//            return YES;
-//        }
-//        else return NO;
-//    }
-    return NO;
 }
 
 +(NSString *)stringForParticipantsInConference:(Conference *)conference{
@@ -372,6 +327,120 @@ static NSString *modelName = @"Conference";
 +(void)save:(ManagedModel *)managedModel{
     [super save:managedModel];
     [self scheduleConferenceNotifications];
+}
+
++(void)addConferencesToCalendar:(EKEventStore *)eventStore{
+    NSLog(@"add Conferences to calendar");
+    NSArray *all = [self all];
+    for (Conference *conference in all) {
+        NSLog(@"checking %@ %@", conference.name, conference.addToCal.boolValue?@"YES":@"NO");
+        if(conference.addToCal.boolValue){
+            NSLog(@"adding conference %@", conference.name);
+            NSError *err;
+            
+            EKEvent *conferenceEvent = [eventStore eventWithIdentifier:conference.addToCalID];
+            EKRecurrenceRule *recurrenceRule;
+            
+            
+            if(!conferenceEvent){
+                conferenceEvent  = [EKEvent eventWithEventStore:eventStore];
+            }
+            
+            conferenceEvent.title = [NSString stringWithFormat:@"%@ conference call", conference.name];
+            conferenceEvent.notes = [NSString stringWithFormat:@"Conference Name : %@ Date : %@", conference.name, [self stringFromDate:conference.startTime]];
+            
+            
+            EKAlarm *alarm;
+            
+            switch (conference.notify.intValue) {
+                case 1:
+                    alarm =[EKAlarm alarmWithRelativeOffset:-900];
+                    break;
+                case 2:
+                    alarm =[EKAlarm alarmWithRelativeOffset:-1800];
+                    break;
+                case 3:
+                    alarm =[EKAlarm alarmWithRelativeOffset:-3600];
+                    break;
+                case 4:
+                    alarm =[EKAlarm alarmWithRelativeOffset:-86400];
+                    break;
+            }
+            
+            if(alarm) {
+                [conferenceEvent addAlarm:alarm];
+            }
+            
+            conferenceEvent.startDate = conference.startTime;
+            conferenceEvent.endDate = conference.endTime;
+            
+            switch (conference.repeat.intValue) {
+                case 1:
+                    recurrenceRule = [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:EKRecurrenceFrequencyDaily interval:1 end:Nil];
+                    break;
+                case 2:
+                    recurrenceRule = [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:EKRecurrenceFrequencyWeekly interval:1 end:Nil];
+                    break;
+                case 3:
+                    recurrenceRule = [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:EKRecurrenceFrequencyWeekly interval:2 end:Nil];
+                    break;
+                case 4:
+                    recurrenceRule = [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:EKRecurrenceFrequencyMonthly interval:1 end:Nil];
+                    break;
+                    
+                default:
+                    break;
+            }
+            if (recurrenceRule) {
+                [conferenceEvent addRecurrenceRule:recurrenceRule];
+            }
+            
+            [conferenceEvent setCalendar:[eventStore defaultCalendarForNewEvents]];
+            
+            [eventStore saveEvent:conferenceEvent span:EKSpanThisEvent error:&err];
+            if (err) {
+                NSLog(@"Error");
+            }
+            conference.addToCalID = conferenceEvent.eventIdentifier;
+        }
+    }
+}
+
++(void)updateAllConferenceDates{
+    NSLog(@"updateAllConferenceDates");
+    NSArray *all = [Conference all];
+    NSDate *now = [NSDate date];
+    for (Conference *conference in all) {
+        NSLog(@"Conference Start time : %@ now %@", conference.startTime, now);
+        if ([conference.startTime timeIntervalSinceDate:now] < 0 && conference.repeat.intValue != 0) {
+            NSLog(@"date is older");
+            int duration = [conference.endTime timeIntervalSinceDate:conference.startTime];
+            int interval = 0 ;
+            switch (conference.repeat.intValue) {
+                case 1:
+                    interval = 86400;
+                    break;
+                case 2:
+                    interval = 86400 * 7;
+                    break;
+                case 3:
+                    interval = 1209600;
+                    break;
+                case 4:
+                    interval = 2629743.83;
+                    break;
+            }
+            NSDate *newDate = conference.startTime;
+            do {
+                NSLog(@"setting new date");
+                newDate = [newDate dateByAddingTimeInterval:interval];
+            } while (newDate < now);
+            conference.startTime = newDate;
+            conference.endTime = [newDate dateByAddingTimeInterval:duration];
+        }
+    }
+    [super dispatchAll];
+    [self save:nil];
 }
 
 

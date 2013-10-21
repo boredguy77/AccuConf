@@ -175,6 +175,10 @@
     if(startImmediately){
         conf.startTime = [NSDate date];
         conf.endTime = [[NSDate date] dateByAddingTimeInterval:3600];
+        conf.repeat = [NSNumber numberWithInt:0];
+        conf.notify = [NSNumber numberWithInt:0];
+        conf.addToCal = [NSNumber numberWithBool:NO];
+        
     } else {
         if (!startDate) {
             startDate = [NSDate date];
@@ -184,10 +188,10 @@
         }
         conf.startTime = startDate;
         conf.endTime = endDate;
+        conf.repeat = [NSNumber numberWithInt:repeatSetting];
+        conf.notify = [NSNumber numberWithInt:notifySetting];
+        conf.addToCal = [NSNumber numberWithBool:self.addToCalSwitch.on];
     }
-    conf.repeat = [NSNumber numberWithInt:repeatSetting];
-    conf.notify = [NSNumber numberWithInt:notifySetting];
-    conf.addToCal = [NSNumber numberWithBool:self.addToCalSwitch.on];
 }
 
 -(void)resignFirstResponder{

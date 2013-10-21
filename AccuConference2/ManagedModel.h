@@ -7,6 +7,7 @@
 -(void)clone:(ManagedModel *)modelToCopy;
 
 +(NSArray *)all;
++(void)dispatchAll;
 +(ManagedModel *)insert:(ManagedModel *)unmanagedModel;
 +(void)save:(ManagedModel *)managedModel;
 +(ManagedModel *)update:(ManagedModel *)managedModel;

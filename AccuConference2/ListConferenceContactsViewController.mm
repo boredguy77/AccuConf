@@ -1,4 +1,5 @@
 #import "ListConferenceContactsViewController.h"
+#import <EventKit/EventKit.h>
 
 @implementation ListConferenceContactsViewController
 @synthesize conference, table, participants, moderators;
@@ -158,12 +159,21 @@
 }
 
 -(void)doneButtonPressed{
+    
     [self.conference setParticipants:[NSOrderedSet orderedSetWithArray:self.participants]];
     [self.conference setModerators:[NSOrderedSet orderedSetWithArray:self.moderators]];
     self.conference.isOwnerModerator = [NSNumber numberWithBool:isSelfModerator];
     self.conference.isOwnerParticipant = [NSNumber numberWithBool:isSelfParticipant];
-    
     [Conference save:self.conference];
+    EKEventStore *es = [[EKEventStore alloc] init];
+    [es requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+        if (!granted) {
+            [[[UIAlertView alloc] initWithTitle:@"No Calendar Access" message:@"Unable to modify your calendar, Change settings in privacy and retry this operation" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
+        } else {
+            [Conference addConferencesToCalendar:es];
+            [Conference save:nil];
+        }
+    }];
     selectedArray = nil;
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
