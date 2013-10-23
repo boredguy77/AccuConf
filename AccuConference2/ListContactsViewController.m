@@ -79,8 +79,8 @@
 }
 
 -(void) initContactData{
-    [self deleteDummyData];
-    [self generateDummyData];
+//    [self deleteDummyData];
+//    [self generateDummyData];
     self.contacts = [self AllContactsFromDB];
     self.accudialContacts = [self AccudialContactsFromDB];
     self.groups = [self AllGroups];

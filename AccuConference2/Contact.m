@@ -15,6 +15,7 @@ static NSString *modelName = @"Contact";
 @dynamic moderatorConferences;
 @dynamic participantConferences;
 @dynamic recordID;
+@dynamic ownerContact;
 
 -(void)clone:(Contact *)contactToCopy{
     self.fName = contactToCopy.fName;
@@ -51,6 +52,33 @@ static NSString *modelName = @"Contact";
 
 +(void)setEntity:(NSEntityDescription *)ety{
     entity = ety;
+}
+
++(Contact *) ownerContact{
+    NSManagedObjectContext *context = [super managedObjectContextRef];
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Contact" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ownerContact==%@",[NSNumber numberWithBool:YES]];
+    
+    [request setPredicate:predicate];
+    
+    NSError *error;
+    NSArray *array = [context executeFetchRequest:request error:&error];
+    
+    Contact *contact = (Contact *) [array firstObject];
+    if(!contact){
+        contact = (Contact *)[Contact instance:YES];
+        contact.ownerContact = [NSNumber numberWithBool:YES];
+        contact.fName = @"(You)";
+        contact.lName = @" ";
+        [Contact save:contact];
+    }
+    
+    return contact;
 }
 
 @end

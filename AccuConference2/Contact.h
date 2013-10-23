@@ -12,12 +12,15 @@
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * phone;
 @property (nonatomic, retain) NSNumber * addToPhone;
+@property (nonatomic, retain) NSNumber * ownerContact;
 @property (nonatomic, retain) NSOrderedSet *groups;
 @property (nonatomic, retain) Conference *moderatorConferences;
 @property (nonatomic, retain) Conference *participantConferences;
 @property (nonatomic, retain) NSNumber * recordID;
 
 +(Contact *)contactForRecordID:(NSInteger)id;
+
++(Contact *) ownerContact;
 
 @end
 

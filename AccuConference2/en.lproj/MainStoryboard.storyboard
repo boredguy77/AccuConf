@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QQ9-Oq-g4D">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
@@ -1086,7 +1086,7 @@
                                     <constraint firstAttribute="width" constant="240" id="Sh2-nV-1OW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="15"/>
-                                <state key="normal" title="CREATE CONFERENCE">
+                                <state key="normal" title="CREATE MEETING">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1395,7 +1395,7 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Moderator Code:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvA-t8-mGG">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Moderator Code:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvA-t8-mGG">
                                 <rect key="frame" x="45" y="131" width="123" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="123" id="Kix-7F-xs0"/>
@@ -1406,7 +1406,7 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Participant Code:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcS-TI-bv4">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Participant Code:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcS-TI-bv4">
                                 <rect key="frame" x="45" y="154" width="123" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="igS-ua-yL4"/>
@@ -1445,7 +1445,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="clb-Sg-gy9">
-                                <rect key="frame" x="45" y="185" width="230" height="44"/>
+                                <rect key="frame" x="45" y="179" width="230" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="FK4-NZ-zQe"/>
                                     <constraint firstAttribute="width" constant="230" id="znZ-uM-Dck"/>
@@ -1458,7 +1458,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hrm-ej-cD7">
-                                <rect key="frame" x="45" y="237" width="230" height="44"/>
+                                <rect key="frame" x="45" y="231" width="230" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="230" id="Sfw-jR-Xir"/>
                                     <constraint firstAttribute="height" constant="44" id="lZz-N0-oJ5"/>
@@ -1471,7 +1471,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ju9-QR-Uen">
-                                <rect key="frame" x="45" y="291" width="230" height="44"/>
+                                <rect key="frame" x="45" y="285" width="230" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Whn-3v-rUV"/>
                                     <constraint firstAttribute="width" constant="230" id="fcK-V8-8ra"/>
@@ -1486,7 +1486,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="cUi-S8-jXz">
-                                <rect key="frame" x="20" y="350" width="280" height="169"/>
+                                <rect key="frame" x="20" y="344" width="280" height="175"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="sGP-MO-55Z"/>
@@ -1540,7 +1540,7 @@
                             <constraint firstItem="qnp-ZY-Ovf" firstAttribute="centerY" secondItem="KKi-SF-Xk5" secondAttribute="centerY" id="FJ0-Fn-3z8"/>
                             <constraint firstItem="Ju9-QR-Uen" firstAttribute="top" secondItem="hrm-ej-cD7" secondAttribute="bottom" constant="10" id="Gi2-LG-q8w"/>
                             <constraint firstAttribute="centerX" secondItem="U8J-sL-hGQ" secondAttribute="centerX" id="Ie4-ZZ-jyK"/>
-                            <constraint firstItem="clb-Sg-gy9" firstAttribute="top" secondItem="UX8-lx-nFz" secondAttribute="bottom" constant="10" id="JaB-kN-Hjg"/>
+                            <constraint firstItem="clb-Sg-gy9" firstAttribute="top" secondItem="UX8-lx-nFz" secondAttribute="bottom" constant="4" id="JqO-YT-oCE"/>
                             <constraint firstItem="rvA-t8-mGG" firstAttribute="top" secondItem="qnp-ZY-Ovf" secondAttribute="bottom" constant="4" id="Ju9-nb-AjC"/>
                             <constraint firstAttribute="trailing" secondItem="qnp-ZY-Ovf" secondAttribute="trailing" constant="20" id="KXi-TO-5je"/>
                             <constraint firstItem="rvA-t8-mGG" firstAttribute="leading" secondItem="CcS-TI-bv4" secondAttribute="leading" id="Nbj-jH-GHJ"/>
@@ -2066,7 +2066,7 @@
                                             <!--2037-12-31 11:00:00 +0000-->
                                         </date>
                                         <timeZone key="timeZone" name="America/Los_Angeles">
-                                            <mutableData key="data">
+                                            <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
 y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
 5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
@@ -2084,7 +2084,7 @@ f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</mutableData>
+</data>
                                         </timeZone>
                                     </datePicker>
                                 </subviews>
@@ -2190,7 +2190,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <action selector="unFocusKeyboard" destination="3cs-Pl-CRo" eventType="editingDidEnd" id="aUT-Oq-GOi"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Participant Code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y99-zw-ZIW" customClass="RoundRectTextField">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Moderator Code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y99-zw-ZIW" customClass="RoundRectTextField">
                                         <rect key="frame" x="20" y="104" width="272" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="egQ-MQ-8dd"/>
@@ -2202,7 +2202,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <action selector="unFocusKeyboard" destination="3cs-Pl-CRo" eventType="editingDidEnd" id="ws6-VM-l6t"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Conference Suffix" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CNL-pF-El4" customClass="RoundRectTextField">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Participant Code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CNL-pF-El4" customClass="RoundRectTextField">
                                         <rect key="frame" x="20" y="152" width="272" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="dZj-np-9cZ"/>
@@ -2214,7 +2214,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <action selector="unFocusKeyboard" destination="3cs-Pl-CRo" eventType="editingDidEnd" id="e3b-55-GbI"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Moderator Code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DWj-Eh-GRU" customClass="RoundRectTextField">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Conference Suffix" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DWj-Eh-GRU" customClass="RoundRectTextField">
                                         <rect key="frame" x="20" y="200" width="272" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="0yK-La-Vrh"/>
@@ -2290,11 +2290,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </navigationItem>
                     <connections>
                         <outlet property="deleteButton" destination="n0L-VP-qyn" id="eFl-ds-YVq"/>
-                        <outlet property="moderatorCode" destination="DWj-Eh-GRU" id="wie-us-ti6"/>
+                        <outlet property="moderatorCode" destination="Y99-zw-ZIW" id="hoa-HF-63N"/>
                         <outlet property="name" destination="reL-Z2-MhK" id="Wqz-dd-SYO"/>
                         <outlet property="number" destination="8bq-bj-Xvs" id="PDH-Gj-CqP"/>
-                        <outlet property="participantCode" destination="Y99-zw-ZIW" id="LYg-Fp-cKr"/>
-                        <outlet property="suffix" destination="CNL-pF-El4" id="qyx-6X-Hv0"/>
+                        <outlet property="participantCode" destination="CNL-pF-El4" id="90H-ty-FYX"/>
+                        <outlet property="suffix" destination="DWj-Eh-GRU" id="xnh-9W-eS3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FbQ-JE-bvZ" userLabel="First Responder" sceneMemberID="firstResponder"/>

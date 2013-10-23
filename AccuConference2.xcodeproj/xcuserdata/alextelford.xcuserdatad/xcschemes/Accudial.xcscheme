@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "09FEA4EC17C9A29300958A17"
-               BuildableName = "AccuConference2.app"
+               BuildableName = "AccuDial.app"
                BlueprintName = "AccuDial"
                ReferencedContainer = "container:AccuConference2.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "09FEA4EC17C9A29300958A17"
-            BuildableName = "AccuConference2.app"
+            BuildableName = "AccuDial.app"
             BlueprintName = "AccuDial"
             ReferencedContainer = "container:AccuConference2.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "09FEA4EC17C9A29300958A17"
-            BuildableName = "AccuConference2.app"
+            BuildableName = "AccuDial.app"
             BlueprintName = "AccuDial"
             ReferencedContainer = "container:AccuConference2.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "09FEA4EC17C9A29300958A17"
-            BuildableName = "AccuConference2.app"
+            BuildableName = "AccuDial.app"
             BlueprintName = "AccuDial"
             ReferencedContainer = "container:AccuConference2.xcodeproj">
          </BuildableReference>

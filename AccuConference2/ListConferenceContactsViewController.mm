@@ -37,6 +37,12 @@
                 break;
             case 1:
                 isSelfModerator = !isSelfModerator;
+                
+                if(!isSelfModerator){
+                    [self.moderators removeObject:[Contact ownerContact]];
+                } else if(![self.moderators containsObject:[Contact ownerContact]]){
+                    [self.moderators addObject:[Contact ownerContact]];
+                }
                 [self.table reloadData];
                 break;
         }
@@ -47,6 +53,12 @@
                 break;
             case 1:
                 isSelfParticipant = !isSelfParticipant;
+                
+                if(!isSelfParticipant){
+                    [self.participants removeObject:[Contact ownerContact]];
+                } else if(![self.participants containsObject:[Contact ownerContact]]){
+                    [self.participants addObject:[Contact ownerContact]];
+                }
                 [self.table reloadData];
                 break;
         }
@@ -96,6 +108,11 @@
         UIButton *deleteButton = (UIButton *) [contactCell viewWithTag:2];
         contactNameLabel.text = [NSString stringWithFormat:@"%@ %@",contact.fName , contact.lName];
         [deleteButton addTarget:self action:@selector(deleteContactPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if (contact == [Contact ownerContact]) {
+            deleteBtn.hidden = YES;
+        }
+        
         return contactCell;
     }
 }
@@ -160,22 +177,27 @@
 
 -(void)doneButtonPressed{
     
-    [self.conference setParticipants:[NSOrderedSet orderedSetWithArray:self.participants]];
-    [self.conference setModerators:[NSOrderedSet orderedSetWithArray:self.moderators]];
-    self.conference.isOwnerModerator = [NSNumber numberWithBool:isSelfModerator];
-    self.conference.isOwnerParticipant = [NSNumber numberWithBool:isSelfParticipant];
-    [Conference save:self.conference];
-    EKEventStore *es = [[EKEventStore alloc] init];
-    [es requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
-        if (!granted) {
-            [[[UIAlertView alloc] initWithTitle:@"No Calendar Access" message:@"Unable to modify your calendar, Change settings in privacy and retry this operation" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
-        } else {
-            [Conference addConferencesToCalendar:es];
-            [Conference save:nil];
-        }
-    }];
-    selectedArray = nil;
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if(self.participants.count > 0 || self.moderators.count > 0){
+        
+        [self.conference setParticipants:[NSOrderedSet orderedSetWithArray:self.participants]];
+        [self.conference setModerators:[NSOrderedSet orderedSetWithArray:self.moderators]];
+        self.conference.isOwnerModerator = [NSNumber numberWithBool:isSelfModerator];
+        self.conference.isOwnerParticipant = [NSNumber numberWithBool:isSelfParticipant];
+        [Conference save:self.conference];
+        EKEventStore *es = [[EKEventStore alloc] init];
+        [es requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+            if (!granted) {
+                [[[UIAlertView alloc] initWithTitle:@"No Calendar Access" message:@"Unable to modify your calendar, Change settings in privacy and retry this operation" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
+            } else {
+                [Conference addConferencesToCalendar:es];
+                [Conference save:nil];
+            }
+        }];
+        selectedArray = nil;
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"Cannot Save" message:@"Meeting requires at least one contact in order to be saved" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+    }
 }
 
 #pragma mark - List Contacts Selection Protocol
